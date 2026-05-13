@@ -2,14 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  BedDouble,
   BriefcaseBusiness,
-  BrushCleaning,
   Check,
   CircleDot,
-  Factory,
-  House,
-  RefreshCw,
+  Handshake,
+  Repeat2,
+  UsersRound,
   Wrench,
 } from "lucide-react";
 import { space_grotesk } from "@/fonts";
@@ -24,53 +22,49 @@ import {
 } from "../home-motion";
 
 export const metadata: Metadata = {
-  title: "Upratovanie | Pluto Prime",
+  title: "Workforce | Pluto Prime",
   description:
-    "Profesionálne upratovacie služby pre domácnosti, firmy, hotely a priemyselné objekty v Holandsku.",
+    "Zabezpečenie kvalifikovaných a pomocných pracovníkov pre krátkodobé aj dlhodobé projekty v Holandsku.",
 };
 
 const services = [
   {
-    label: "upratovanie bytov a rodinných domov",
-    icon: House,
+    label: "kvalifikovaní aj pomocní pracovníci",
+    icon: UsersRound,
   },
   {
-    label: "upratovanie kancelárií a firiem",
+    label: "rôzne profesie podľa projektu",
     icon: BriefcaseBusiness,
   },
   {
-    label: "upratovanie hotelov a krátkodobých prenájmov",
-    icon: BedDouble,
+    label: "krátkodobé aj dlhodobé spolupráce",
+    icon: Handshake,
   },
   {
-    label: "upratovanie spoločných a priemyselných priestorov",
-    icon: Factory,
-  },
-  {
-    label: "pravidelné a jednorazové upratovanie",
-    icon: RefreshCw,
+    label: "flexibilné riešenia pre firmy",
+    icon: Repeat2,
   },
 ];
 
 const reasons = [
-  "spoľahlivý a overený tím",
-  "flexibilné služby podľa potreby",
-  "dôraz na detail a kvalitu",
-  "rýchla komunikácia",
+  "skúsenosti s projektmi v zahraničí",
+  "dôraz na kvalitu a spoľahlivosť",
+  "rýchle zabezpečenie pracovníkov",
+  "individuálny prístup ku klientom",
 ];
 
 const heroImage =
-  "/img/cleaning.jpg";
+  "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1300&q=85";
 
-const cleaningImage =
-  "/img/cleaning-section.jpg";
+const workforceImage =
+  "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=900&q=85";
 
 const goldText =
   "bg-[linear-gradient(135deg,#A76B0B_0%,#ECC560_100%)] bg-clip-text text-transparent";
 
-const goldStroke = "stroke-[url(#cleaning-gold-gradient)]";
+const goldStroke = "stroke-[url(#workforce-gold-gradient)]";
 
-export default function CleaningPage() {
+export default function WorkforcePage() {
   return (
     <MotionRoot>
       <main className="min-h-screen bg-[#1b1f20] pt-16 text-[#e5e0d8]">
@@ -80,7 +74,7 @@ export default function CleaningPage() {
         >
           <defs>
             <linearGradient
-              id="cleaning-gold-gradient"
+              id="workforce-gold-gradient"
               x1="0%"
               y1="0%"
               x2="100%"
@@ -96,14 +90,14 @@ export default function CleaningPage() {
           <MotionHeroBackground className="absolute inset-0">
             <Image
               src={heroImage}
-              alt="Profesionálne upratovanie interiéru"
+              alt="Pracovníci na stavebnom projekte"
               fill
               priority
               sizes="100vw"
               className="object-cover opacity-30"
             />
           </MotionHeroBackground>
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(22,25,26,.18)_0%,rgba(22,25,26,.32)_48%,#1b1f20_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(22,25,26,.24)_0%,rgba(22,25,26,.38)_48%,#1b1f20_100%)]" />
 
           <div className="relative mx-auto max-w-3xl">
             <MotionHeroItem delay={0.08}>
@@ -113,22 +107,22 @@ export default function CleaningPage() {
               delay={0.18}
               className={`mt-4 text-[clamp(1.7rem,8vw,3.7rem)] font-bold uppercase leading-none tracking-[0.18em] drop-shadow-[0_8px_16px_rgba(0,0,0,.5)] ${space_grotesk.className} ${goldText}`}
             >
-              Upratovanie
+              Workforce
             </MotionHeroTitle>
             <MotionHeroItem
               delay={0.3}
               className="mx-auto mt-7 max-w-xl space-y-5 text-left text-[1.08rem] font-extrabold leading-[1.22] tracking-[0.02em] text-white/78 sm:text-center sm:text-xl"
             >
               <p>
-                Ponúkame profesionálne upratovacie služby pre domácnosti, firmy
-                a priemyselné objekty v Amsterdame, Alkmaare, Groningene a
-                okolí. Pracujeme spoľahlivo, dôsledne a flexibilne podľa vašich
-                potrieb.
+                Zabezpečujeme kvalifikovaných pracovníkov pre rôzne odvetvia v
+                Amsterdame, Alkmaare, Groningene a okolí. Ponúkame flexibilné
+                riešenia pre firmy, ktoré potrebujú spoľahlivých ľudí na
+                krátkodobé aj dlhodobé projekty.
               </p>
               <p>
-                Zabezpečujeme pravidelné aj jednorazové upratovanie bytov,
-                domov, kancelárií,   a spoločných priestorov. Každý
-                projekt prispôsobujeme konkrétnemu zákazníkovi.
+                Dodávame pracovníkov v stavebníctve, technických profesiách aj
+                pomocných prácach. Každého pracovníka vyberáme s dôrazom na
+                skúsenosti, pracovnú morálku a spoľahlivosť.
               </p>
             </MotionHeroItem>
           </div>
@@ -137,10 +131,10 @@ export default function CleaningPage() {
         <MotionSection className="px-6 pb-12 pt-8 sm:px-10 lg:pb-20">
           <div className="mx-auto grid max-w-5xl gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
             <MotionBlock className="mx-auto max-w-xl text-left lg:pt-8">
-              <BrushCleaning className={`mx-auto h-16 w-16 stroke-[1.8] lg:mx-0 ${goldStroke}`} />
+              <UsersRound className={`mx-auto h-16 w-16 stroke-[1.8] lg:mx-0 ${goldStroke}`} />
               <p className="mt-8 text-[1.05rem] font-extrabold leading-[1.22] tracking-[0.02em] text-white/74">
-                Dôraz kladieme na kvalitu, detail a spokojnosť klienta. Sme
-                pripravení reagovať rýchlo a prispôsobiť sa vašim požiadavkám.
+                Naším cieľom je zabezpečiť stabilný a kvalitný pracovný tím,
+                ktorý zapadne do vašich projektov bez komplikácií.
               </p>
             </MotionBlock>
 
@@ -149,8 +143,8 @@ export default function CleaningPage() {
               className="group mx-auto w-full max-w-xl overflow-hidden rounded-lg shadow-[0_0_25px_3px_rgba(167,107,11,.25)]"
             >
               <Image
-                src={cleaningImage}
-                alt="Upratovacie vybavenie pripravené na prácu"
+                src={workforceImage}
+                alt="Pracovné vesty a ochranné prilby pripravené na projekt"
                 width={900}
                 height={620}
                 loading="lazy"
@@ -168,15 +162,15 @@ export default function CleaningPage() {
               <Wrench className={`h-6 w-6 ${goldStroke}`} />
               Naše služby
             </h2>
-            <ul className="mx-auto mt-6 grid max-w-4xl gap-x-10 gap-y-4 text-left text-[1rem] font-extrabold leading-tight tracking-[0.02em] text-white/72 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="mx-auto mt-6 grid max-w-4xl gap-x-10 gap-y-4 text-left text-[1rem] font-extrabold leading-tight tracking-[0.02em] text-white/72 sm:grid-cols-2">
               {services.map((service) => {
                 const Icon = service.icon;
 
                 return (
                   <li
-                  key={service.label}
-                  className="flex min-w-0 items-start gap-3"
-                >
+                    key={service.label}
+                    className="flex min-w-0 items-start gap-3"
+                  >
                     <Icon className={`mt-0.5 h-5 w-5 shrink-0 stroke-[2.1] ${goldStroke}`} />
                     <span>{service.label}</span>
                   </li>
@@ -209,13 +203,13 @@ export default function CleaningPage() {
               Získajte cenovú ponuku
             </p>
             <h2 className="mt-1 text-3xl font-extrabold leading-[1.03] tracking-[0.01em] sm:text-5xl">
-              Začnime váš projekt
+              Začnime spolupracovať
             </h2>
             <p className="mt-2 max-w-lg text-base font-bold leading-tight text-[#171b1c] sm:text-lg">
-              Prispôsobíme služby presne vašim potrebám
+              Navrhneme vám riešenie presne podľa vašich potrieb
             </p>
             <Link
-              href="mailto:info@plutoprime.nl?subject=Cenova%20ponuka%20-%20upratovanie"
+              href="mailto:info@plutoprime.nl?subject=Cenova%20ponuka%20-%20workforce"
               className="mt-9 inline-flex min-h-14 w-full max-w-md items-center justify-center rounded-md bg-[#c9963d] px-7 text-base font-extrabold text-white shadow-[0_8px_10px_rgba(0,0,0,.3)] transition hover:bg-[#ad7a21]"
             >
               Kontaktujte nás

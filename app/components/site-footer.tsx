@@ -7,7 +7,7 @@ const footerLinks = [
   { label: "O nás", href: "/about" },
   { label: "Rekonštrukcie", href: "/renovations" },
   { label: "Upratovanie", href: "/cleaning" },
-  { label: "Workforce", href: "/#workforce" },
+  { label: "Workforce", href: "/workforce" },
   { label: "Realizácie", href: "/#realizations" },
   { label: "Kontakt", href: "/#contact" },
 ];

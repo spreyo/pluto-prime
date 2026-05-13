@@ -67,10 +67,33 @@ const bathroomImage =
 const interiorImage =
   "/img/interior.jpg";
 
+const goldText =
+  "bg-[linear-gradient(135deg,#A76B0B_0%,#ECC560_100%)] bg-clip-text text-transparent";
+
+const goldStroke = "stroke-[url(#renovations-gold-gradient)]";
+
 export default function RenovationsPage() {
   return (
     <MotionRoot>
     <main className="min-h-screen bg-[#1b1f20] pt-16 text-[#e5e0d8]">
+      <svg
+        aria-hidden="true"
+        className="pointer-events-none absolute h-0 w-0"
+      >
+        <defs>
+          <linearGradient
+            id="renovations-gold-gradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
+            <stop offset="0%" stopColor="#A76B0B" />
+            <stop offset="100%" stopColor="#ECC560" />
+          </linearGradient>
+        </defs>
+      </svg>
+
       <section className="relative overflow-hidden px-6 pb-12 pt-24 text-center sm:px-10 sm:pt-28 lg:pb-20">
         <MotionHeroBackground className="absolute inset-0">
           <Image
@@ -90,7 +113,7 @@ export default function RenovationsPage() {
           </MotionHeroItem>
           <MotionHeroTitle
             delay={0.18}
-            className={`mt-4 text-[clamp(1.7rem,8vw,3.7rem)] font-bold uppercase leading-none tracking-[0.18em] text-[#d49a21] drop-shadow-[0_8px_16px_rgba(0,0,0,.5)] ${space_grotesk.className}`}
+            className={`mt-4 text-[clamp(1.7rem,8vw,3.7rem)] font-bold uppercase leading-none tracking-[0.18em] drop-shadow-[0_8px_16px_rgba(0,0,0,.5)] ${space_grotesk.className} ${goldText}`}
           >
             Rekonštrukcie
           </MotionHeroTitle>
@@ -113,7 +136,7 @@ export default function RenovationsPage() {
       <MotionSection className="px-6 pb-12 pt-8 sm:px-10 lg:pb-20">
         <div className="mx-auto grid max-w-5xl gap-14 lg:grid-cols-2 lg:items-start lg:gap-16">
           <MotionBlock className="mx-auto max-w-xl text-left lg:pt-8">
-            <Bath className="mx-auto h-16 w-16 stroke-[1.8] text-[#c98b13] lg:mx-0" />
+            <Bath className={`mx-auto h-16 w-16 stroke-[1.8] lg:mx-0 ${goldStroke}`} />
             <p className="mt-8 text-[1.05rem] font-extrabold leading-[1.22] tracking-[0.02em] text-white/74">
               Špecializujeme sa najmä na rekonštrukcie kúpeľní na kľúč.
               Postaráme sa o celý proces vrátane rozvodov vody, odpadu,
@@ -144,7 +167,7 @@ export default function RenovationsPage() {
             delay={0.1}
             className="mx-auto max-w-xl text-left lg:order-4 lg:pt-8"
           >
-            <House className="mx-auto h-16 w-16 stroke-[1.8] text-[#c98b13] lg:mx-0" />
+            <House className={`mx-auto h-16 w-16 stroke-[1.8] lg:mx-0 ${goldStroke}`} />
             <p className="mt-8 text-[1.05rem] font-extrabold leading-[1.22] tracking-[0.02em] text-white/74">
               Ponúkame aj kompletné rekonštrukcie interiérov - od menších
               úprav až po kompletné prerábky bytov a domov. Dôraz kladieme na
@@ -180,8 +203,8 @@ export default function RenovationsPage() {
           delay={0.1}
           className="mx-auto mt-10 max-w-5xl text-center"
         >
-          <h2 className="inline-flex items-center gap-3 text-xl font-extrabold text-[#c98b13]">
-            <Wrench className="h-6 w-6" />
+          <h2 className={`inline-flex items-center gap-3 text-xl font-extrabold ${goldText}`}>
+            <Wrench className={`h-6 w-6 ${goldStroke}`} />
             Naše služby
           </h2>
           <ul className="mx-auto mt-6 grid max-w-4xl gap-x-10 gap-y-4 text-left text-[1rem] font-extrabold leading-tight tracking-[0.02em] text-white/72 sm:grid-cols-2 lg:grid-cols-3">
@@ -193,7 +216,7 @@ export default function RenovationsPage() {
                   key={service.label}
                   className="flex min-w-0 items-start gap-3"
                 >
-                  <Icon className="mt-0.5 h-5 w-5 shrink-0 stroke-[2.1] text-[#c98b13]" />
+                  <Icon className={`mt-0.5 h-5 w-5 shrink-0 stroke-[2.1] ${goldStroke}`} />
                   <span>{service.label}</span>
                 </li>
               );
@@ -204,14 +227,14 @@ export default function RenovationsPage() {
 
       <MotionSection className="grid place-items-center bg-[#242829] px-6 py-20 sm:px-10">
         <div className="flex w-fit max-w-full flex-col items-center">
-          <h2 className="inline-flex items-center gap-3 text-xl font-extrabold text-[#c98b13]">
-            <CircleDot className="h-6 w-6" />
+          <h2 className={`inline-flex items-center gap-3 text-xl font-extrabold ${goldText}`}>
+            <CircleDot className={`h-6 w-6 ${goldStroke}`} />
             Prečo si vybrať nás
           </h2>
           <ul className="mx-auto mt-7 w-fit max-w-full space-y-4 text-left text-[1.05rem] font-extrabold leading-tight tracking-[0.02em] text-white/74">
             {reasons.map((reason) => (
               <li key={reason} className="flex items-start gap-3">
-                <Check className="mt-0.5 h-5 w-5 shrink-0 stroke-[2.4] text-[#c98b13]" />
+                <Check className={`mt-0.5 h-5 w-5 shrink-0 stroke-[2.4] ${goldStroke}`} />
                 <span>{reason}</span>
               </li>
             ))}
