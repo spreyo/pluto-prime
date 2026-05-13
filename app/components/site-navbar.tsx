@@ -15,7 +15,7 @@ import LionMark from "./lion-mark";
 const navItems = [
   { label: "About Us", href: "/about" },
   { label: "Renovations", href: "/renovations" },
-  { label: "Cleaning", href: "/#cleaning" },
+  { label: "Cleaning", href: "/cleaning" },
   { label: "Workforce", href: "/#workforce" },
   { label: "Contact", href: "/#contact" },
   { label: "Realizations", href: "/#realizations" },
