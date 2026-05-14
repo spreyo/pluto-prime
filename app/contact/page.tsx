@@ -21,13 +21,16 @@ export const metadata: Metadata = {
 
 const resend = new Resend("re_eftZaWc4_Nhc3CLxiZrBWtihFb5dZxA1T");
 
+
+
 function sendEmail(){
     resend.emails.send({
     from: 'onboarding@resend.dev',
     to: 'spreyyo@gmail.com',
     subject: "Pluto Prime contact form email",
-    html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
+    html: '<table width="560" cellpadding="0" cellspacing="0" border="0" style="background-color:#1a1a1a;border-radius:8px;font-family:Arial,Helvetica,sans-serif;"><tr><td align="center" style="padding:36px 40px 24px;"><img src="logo.svg" width="120" height="118" alt="PLUTO Prime logo" style="display:block;margin:0 auto 20px;"><div style="font-size:22px;font-weight:700;color:#ECC560;letter-spacing:4px;">PLUTO PRIME</div><div style="font-size:11px;color:#888888;letter-spacing:3px;margin-top:8px;">NOVÝ DOPYT Z WEBU</div></td></tr><tr><td style="padding:0 40px;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top:1px solid #2e2e2e;"></td></tr></table></td></tr><tr><td style="padding:28px 40px 8px;"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;"><tr><td style="font-size:11px;color:#ECC560;letter-spacing:1px;padding-bottom:6px;">MENO</td></tr><tr><td style="background-color:#252525;border-radius:4px;padding:12px 14px;"><span style="font-size:14px;color:#ffffff;">{{meno}}</span></td></tr></table><table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;"><tr><td style="font-size:11px;color:#ECC560;letter-spacing:1px;padding-bottom:6px;">E-MAIL</td></tr><tr><td style="background-color:#252525;border-radius:4px;padding:12px 14px;"><a href="mailto:{{email}}" style="font-size:14px;color:#ECC560;text-decoration:none;">{{email}}</a></td></tr></table><table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;"><tr><td style="font-size:11px;color:#ECC560;letter-spacing:1px;padding-bottom:6px;">TELEFÓN</td></tr><tr><td style="background-color:#252525;border-radius:4px;padding:12px 14px;"><span style="font-size:14px;color:#ffffff;">{{telefon}}</span></td></tr></table><table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;"><tr><td style="font-size:11px;color:#ECC560;letter-spacing:1px;padding-bottom:6px;">SPRÁVA</td></tr><tr><td style="background-color:#252525;border-radius:4px;padding:14px 14px;"><span style="font-size:14px;color:#cccccc;line-height:1.6;">{{sprava}}</span></td></tr></table></td></tr><tr><td align="center" style="padding:0 40px 36px;"><a href="mailto:{{email}}" style="display:inline-block;background-color:#ECC560;color:#1a1a1a;font-size:13px;font-weight:700;text-decoration:none;padding:13px 32px;border-radius:4px;letter-spacing:1px;">ODPOVEDAŤ ZÁUJEMCOVI</a></td></tr><tr><td style="padding:0 40px;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top:1px solid #2e2e2e;"></td></tr></table></td></tr><tr><td align="center" style="padding:20px 40px;"><span style="font-size:11px;color:#555555;">© 2025 PLUTO Prime &nbsp;·&nbsp; plutoprime.nl</span></td></tr></table>'
 });
+
 }
 const goldText =
   "bg-[linear-gradient(135deg,#A76B0B_0%,#ECC560_100%)] bg-clip-text text-transparent";
@@ -38,6 +41,12 @@ const inputClassName =
   "mt-1.5 min-h-11 w-full rounded-md border border-[#8b651f]/70 bg-[#303333] px-3.5 text-sm font-semibold text-white/88 outline-none transition placeholder:text-white/22 focus:border-[#ECC560] focus:ring-2 focus:ring-[#ECC560]/18";
 
 export default function ContactPage() {
+  async function handleContactForm() {
+    "use server";
+
+    sendEmail();
+  }
+
   return (
     <MotionRoot>
       <main className="min-h-screen bg-[#1b1f20] px-6 pb-20 pt-16 text-[#e5e0d8] sm:px-10">
@@ -104,7 +113,7 @@ export default function ContactPage() {
 
         <MotionSection className="mx-auto max-w-xl">
           <MotionBlock className="rounded-2xl bg-[#25292a] px-7 py-8 shadow-[0_0_25px_3px_rgba(167,107,11,.10)] sm:px-10 sm:py-10">
-            <form className="space-y-4" onSubmit={()=>sendEmail()}>
+            <form className="space-y-4" action={handleContactForm}>
               <div>
                 <label
                   htmlFor="firstName"
