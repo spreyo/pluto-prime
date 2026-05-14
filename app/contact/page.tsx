@@ -38,7 +38,7 @@ function escapeHtml(value: string) {
 }
 
 function sendEmail({ meno, email, telefon, sprava }: ContactEmailData){
-    const html = '<table width="560" cellpadding="0" cellspacing="0" border="0" style="background-color:#1a1a1a;border-radius:8px;font-family:Arial,Helvetica,sans-serif;"><tr><td align="center" style="padding:36px 40px 24px;"><img src="https://plutoprime.tiiny.site/logo.svg" width="120" height="118" alt="PLUTO Prime logo" style="display:block;margin:0 auto 20px;"><div style="font-size:22px;font-weight:700;color:#ECC560;letter-spacing:4px;">PLUTO PRIME</div><div style="font-size:11px;color:#888888;letter-spacing:3px;margin-top:8px;">NOVÝ DOPYT Z WEBU</div></td></tr><tr><td style="padding:0 40px;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top:1px solid #2e2e2e;"></td></tr></table></td></tr><tr><td style="padding:28px 40px 8px;"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;"><tr><td style="font-size:11px;color:#ECC560;letter-spacing:1px;padding-bottom:6px;">MENO</td></tr><tr><td style="background-color:#252525;border-radius:4px;padding:12px 14px;"><span style="font-size:14px;color:#ffffff;">{{meno}}</span></td></tr></table><table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;"><tr><td style="font-size:11px;color:#ECC560;letter-spacing:1px;padding-bottom:6px;">E-MAIL</td></tr><tr><td style="background-color:#252525;border-radius:4px;padding:12px 14px;"><a href="mailto:{{email}}" style="font-size:14px;color:#ECC560;text-decoration:none;">{{email}}</a></td></tr></table><table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;"><tr><td style="font-size:11px;color:#ECC560;letter-spacing:1px;padding-bottom:6px;">TELEFÓN</td></tr><tr><td style="background-color:#252525;border-radius:4px;padding:12px 14px;"><span style="font-size:14px;color:#ffffff;">{{telefon}}</span></td></tr></table><table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;"><tr><td style="font-size:11px;color:#ECC560;letter-spacing:1px;padding-bottom:6px;">SPRÁVA</td></tr><tr><td style="background-color:#252525;border-radius:4px;padding:14px 14px;"><span style="font-size:14px;color:#cccccc;line-height:1.6;">{{sprava}}</span></td></tr></table></td></tr><tr><td align="center" style="padding:0 40px 36px;"><a href="mailto:{{email}}" style="display:inline-block;background-color:#ECC560;color:#1a1a1a;font-size:13px;font-weight:700;text-decoration:none;padding:13px 32px;border-radius:4px;letter-spacing:1px;">ODPOVEDAŤ ZÁUJEMCOVI</a></td></tr><tr><td style="padding:0 40px;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top:1px solid #2e2e2e;"></td></tr></table></td></tr><tr><td align="center" style="padding:20px 40px;"><span style="font-size:11px;color:#555555;">© 2025 PLUTO Prime &nbsp;·&nbsp; plutoprime.nl</span></td></tr></table>'
+    const html = '<table width:"100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#1a1a1a;max-width: 560px;border-radius:8px;font-family:Arial,Helvetica,sans-serif;"><tr><td align="center" style="padding:36px 40px 24px;"><img src="https://plutoprime.tiiny.site/logo.svg" width="120" height="118" alt="PLUTO Prime logo" style="display:block;margin:0 auto 20px;"><div style="font-size:22px;font-weight:700;color:#ECC560;letter-spacing:4px;">PLUTO PRIME</div><div style="font-size:11px;color:#888888;letter-spacing:3px;margin-top:8px;">NOVÝ DOPYT Z WEBU</div></td></tr><tr><td style="padding:0 40px;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top:1px solid #2e2e2e;"></td></tr></table></td></tr><tr><td style="padding:28px 40px 8px;"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;"><tr><td style="font-size:11px;color:#ECC560;letter-spacing:1px;padding-bottom:6px;">MENO</td></tr><tr><td style="background-color:#252525;border-radius:4px;padding:12px 14px;"><span style="font-size:14px;color:#ffffff;">{{meno}}</span></td></tr></table><table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;"><tr><td style="font-size:11px;color:#ECC560;letter-spacing:1px;padding-bottom:6px;">E-MAIL</td></tr><tr><td style="background-color:#252525;border-radius:4px;padding:12px 14px;"><a href="mailto:{{email}}" style="font-size:14px;color:#ECC560;text-decoration:none;">{{email}}</a></td></tr></table><table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:18px;"><tr><td style="font-size:11px;color:#ECC560;letter-spacing:1px;padding-bottom:6px;">TELEFÓN</td></tr><tr><td style="background-color:#252525;border-radius:4px;padding:12px 14px;"><span style="font-size:14px;color:#ffffff;">{{telefon}}</span></td></tr></table><table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;"><tr><td style="font-size:11px;color:#ECC560;letter-spacing:1px;padding-bottom:6px;">SPRÁVA</td></tr><tr><td style="background-color:#252525;border-radius:4px;padding:14px 14px;"><span style="font-size:14px;color:#cccccc;line-height:1.6;">{{sprava}}</span></td></tr></table></td></tr><tr><td align="center" style="padding:0 40px 36px;"><a href="mailto:{{email}}" style="display:inline-block;background-color:#ECC560;color:#1a1a1a;font-size:13px;font-weight:700;text-decoration:none;padding:13px 32px;border-radius:4px;letter-spacing:1px;">ODPOVEDAŤ ZÁUJEMCOVI</a></td></tr><tr><td style="padding:0 40px;"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top:1px solid #2e2e2e;"></td></tr></table></td></tr><tr><td align="center" style="padding:20px 40px;"><span style="font-size:11px;color:#555555;">© 2025 PLUTO Prime &nbsp;·&nbsp; plutoprime.nl</span></td></tr></table>'
       .replaceAll("{{meno}}", escapeHtml(meno))
       .replaceAll("{{email}}", escapeHtml(email))
       .replaceAll("{{telefon}}", escapeHtml(telefon))
@@ -73,13 +73,17 @@ function isValidEmail(value: string) {
   return value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-function isValidPhone(value: string) {
+function isValidPhonePrefix(value: string) {
+  return /^\+\d{1,4}$/.test(value);
+}
+
+function isValidPhoneNumber(value: string) {
   const digits = value.replace(/\D/g, "");
 
   return (
-    digits.length >= 7 &&
-    digits.length <= 15 &&
-    /^\+?[\d\s().-]{7,24}$/.test(value)
+    digits.length >= 5 &&
+    digits.length <= 14 &&
+    /^[\d\s().-]{5,24}$/.test(value)
   );
 }
 
@@ -103,9 +107,12 @@ export default function ContactPage() {
     const firstName = getFormString(formData, "firstName", 80);
     const lastName = getFormString(formData, "lastName", 80);
     const email = getFormString(formData, "email", 254);
+    const phonePrefix = getFormString(formData, "phonePrefix", 5);
     const phone = getFormString(formData, "phone", 24);
     const message = getFormString(formData, "message", 2000);
     const fullName = [firstName, lastName].filter(Boolean).join(" ");
+    const combinedPhone = `${phonePrefix} ${phone}`.trim();
+    const combinedPhoneDigits = combinedPhone.replace(/\D/g, "");
 
     if (honeypot) {
       return;
@@ -114,13 +121,16 @@ export default function ContactPage() {
     if (
       !fullName ||
       !isValidEmail(email) ||
-      !isValidPhone(phone) ||
+      !isValidPhonePrefix(phonePrefix) ||
+      !isValidPhoneNumber(phone) ||
+      combinedPhoneDigits.length < 7 ||
+      combinedPhoneDigits.length > 15 ||
       message.length < 10
     ) {
       return;
     }
 
-    const rateLimitKey = `${email.toLowerCase()}|${phone.replace(/\D/g, "")}`;
+    const rateLimitKey = `${email.toLowerCase()}|${combinedPhoneDigits}`;
 
     if (isRateLimited(rateLimitKey)) {
       return;
@@ -129,7 +139,7 @@ export default function ContactPage() {
     await sendEmail({
       meno: fullName,
       email,
-      telefon: phone,
+      telefon: combinedPhone,
       sprava: message,
     });
   }
@@ -269,24 +279,46 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label
-                  htmlFor="phone"
-                  className="text-sm font-extrabold tracking-[0.08em] text-[#ECC560]"
-                >
+                <p className="text-sm font-extrabold tracking-[0.08em] text-[#ECC560]">
                   Telefón
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  autoComplete="tel"
-                  placeholder="+421..."
-                  required
-                  minLength={7}
-                  maxLength={24}
-                  pattern="^\+?[\d\s().-]{7,24}$"
-                  className={inputClassName}
-                />
+                </p>
+                <div className="mt-1.5 grid grid-cols-[6.5rem_1fr] gap-3">
+                  <div>
+                    <label htmlFor="phonePrefix" className="sr-only">
+                      Predvoľba
+                    </label>
+                    <input
+                      id="phonePrefix"
+                      name="phonePrefix"
+                      type="tel"
+                      autoComplete="tel-country-code"
+                      placeholder="+31"
+                      required
+                      maxLength={5}
+                      pattern="^\+\d{1,4}$"
+                      aria-label="Telefónna predvoľba"
+                      className={`${inputClassName} mt-0 text-center`}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="sr-only">
+                      Telefónne číslo
+                    </label>
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      autoComplete="tel-national"
+                      placeholder="612 345 678"
+                      required
+                      minLength={5}
+                      maxLength={24}
+                      pattern="^[\d\s().-]{5,24}$"
+                      aria-label="Telefónne číslo bez predvoľby"
+                      className={`${inputClassName} mt-0`}
+                    />
+                  </div>
+                </div>
               </div>
 
               <div>
