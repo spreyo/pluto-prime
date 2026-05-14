@@ -83,10 +83,11 @@ export default function RenovationsPage() {
         <defs>
           <linearGradient
             id="renovations-gold-gradient"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
+            x1="0"
+            y1="0"
+            x2="24"
+            y2="24"
+            gradientUnits="userSpaceOnUse"
           >
             <stop offset="0%" stopColor="#A76B0B" />
             <stop offset="100%" stopColor="#ECC560" />

@@ -54,10 +54,10 @@ const reasons = [
 ];
 
 const heroImage =
-  "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1300&q=85";
+  "/img/workforce.jpg";
 
 const workforceImage =
-  "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=900&q=85";
+  "/img/workforce-section.jpg";
 
 const goldText =
   "bg-[linear-gradient(135deg,#A76B0B_0%,#ECC560_100%)] bg-clip-text text-transparent";
@@ -75,10 +75,11 @@ export default function WorkforcePage() {
           <defs>
             <linearGradient
               id="workforce-gold-gradient"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
+              x1="0"
+              y1="0"
+              x2="24"
+              y2="24"
+              gradientUnits="userSpaceOnUse"
             >
               <stop offset="0%" stopColor="#A76B0B" />
               <stop offset="100%" stopColor="#ECC560" />
