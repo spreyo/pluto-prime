@@ -60,18 +60,74 @@ const goldStroke = "stroke-[url(#contact-gold-gradient)]";
 const inputClassName =
   "mt-1.5 min-h-11 w-full rounded-md border border-[#8b651f]/70 bg-[#303333] px-3.5 text-sm font-semibold text-white/88 outline-none transition placeholder:text-white/22 focus:border-[#ECC560] focus:ring-2 focus:ring-[#ECC560]/18";
 
+const recentSubmissions = new Map<string, number>();
+const submissionCooldownMs = 60_000;
+
+function getFormString(formData: FormData, key: string, maxLength = 1000) {
+  return String(formData.get(key) ?? "")
+    .trim()
+    .slice(0, maxLength);
+}
+
+function isValidEmail(value: string) {
+  return value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function isValidPhone(value: string) {
+  const digits = value.replace(/\D/g, "");
+
+  return (
+    digits.length >= 7 &&
+    digits.length <= 15 &&
+    /^\+?[\d\s().-]{7,24}$/.test(value)
+  );
+}
+
+function isRateLimited(key: string) {
+  const now = Date.now();
+  const lastSubmissionAt = recentSubmissions.get(key);
+
+  if (lastSubmissionAt && now - lastSubmissionAt < submissionCooldownMs) {
+    return true;
+  }
+
+  recentSubmissions.set(key, now);
+  return false;
+}
+
 export default function ContactPage() {
   async function handleContactForm(formData: FormData) {
     "use server";
 
-    const firstName = String(formData.get("firstName") ?? "").trim();
-    const lastName = String(formData.get("lastName") ?? "").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const phone = String(formData.get("phone") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
+    const honeypot = getFormString(formData, "company", 200);
+    const firstName = getFormString(formData, "firstName", 80);
+    const lastName = getFormString(formData, "lastName", 80);
+    const email = getFormString(formData, "email", 254);
+    const phone = getFormString(formData, "phone", 24);
+    const message = getFormString(formData, "message", 2000);
+    const fullName = [firstName, lastName].filter(Boolean).join(" ");
+
+    if (honeypot) {
+      return;
+    }
+
+    if (
+      !fullName ||
+      !isValidEmail(email) ||
+      !isValidPhone(phone) ||
+      message.length < 10
+    ) {
+      return;
+    }
+
+    const rateLimitKey = `${email.toLowerCase()}|${phone.replace(/\D/g, "")}`;
+
+    if (isRateLimited(rateLimitKey)) {
+      return;
+    }
 
     await sendEmail({
-      meno: [firstName, lastName].filter(Boolean).join(" "),
+      meno: fullName,
       email,
       telefon: phone,
       sprava: message,
@@ -145,6 +201,17 @@ export default function ContactPage() {
         <MotionSection className="mx-auto max-w-xl">
           <MotionBlock className="rounded-2xl bg-[#25292a] px-7 py-8 shadow-[0_0_25px_3px_rgba(167,107,11,.10)] sm:px-10 sm:py-10">
             <form className="space-y-4" action={handleContactForm}>
+              <div className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
+                <label htmlFor="company">Firma</label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div>
                 <label
                   htmlFor="firstName"
@@ -158,6 +225,8 @@ export default function ContactPage() {
                   type="text"
                   autoComplete="given-name"
                   placeholder="Vaše meno"
+                  required
+                  maxLength={80}
                   className={inputClassName}
                 />
               </div>
@@ -175,6 +244,7 @@ export default function ContactPage() {
                   type="text"
                   autoComplete="family-name"
                   placeholder="Vaše priezvisko"
+                  maxLength={80}
                   className={inputClassName}
                 />
               </div>
@@ -192,6 +262,8 @@ export default function ContactPage() {
                   type="email"
                   autoComplete="email"
                   placeholder="vas@email.sk"
+                  required
+                  maxLength={254}
                   className={inputClassName}
                 />
               </div>
@@ -209,6 +281,10 @@ export default function ContactPage() {
                   type="tel"
                   autoComplete="tel"
                   placeholder="+421..."
+                  required
+                  minLength={7}
+                  maxLength={24}
+                  pattern="^\+?[\d\s().-]{7,24}$"
                   className={inputClassName}
                 />
               </div>
@@ -225,6 +301,9 @@ export default function ContactPage() {
                   name="message"
                   rows={6}
                   placeholder="Povedzte nám viac o vašich požiadavkách"
+                  required
+                  minLength={10}
+                  maxLength={2000}
                   className={`${inputClassName} min-h-32 resize-y py-3`}
                 />
               </div>
