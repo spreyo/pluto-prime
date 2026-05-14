@@ -9,7 +9,7 @@ const footerLinks = [
   { label: "Upratovanie", href: "/cleaning" },
   { label: "Workforce", href: "/workforce" },
   { label: "Realizácie", href: "/#realizations" },
-  { label: "Kontakt", href: "/#contact" },
+  { label: "Kontakt", href: "/contact" },
 ];
 
 export function SiteFooter() {
