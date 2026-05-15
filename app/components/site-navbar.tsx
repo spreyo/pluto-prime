@@ -17,7 +17,8 @@ const navItems = [
   { label: "Renovations", href: "/renovations" },
   { label: "Cleaning", href: "/cleaning" },
   { label: "Workforce", href: "/workforce" },
-  { label: "Contact", href: "/contact#formular" }];
+  { label: "Contact", href: "/contact#formular" },
+  { label:" Premium", href:"/premium"}];
 
 const mobileNavItems = [
   { label: "Home", href: "/" },
