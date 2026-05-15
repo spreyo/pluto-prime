@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Mail, Phone } from "lucide-react";
 import LionMark from "./lion-mark";
 import { space_grotesk } from "@/fonts";
+import { getLocaleFromPathname, localizeHref } from "@/i18n";
 
 const footerLinks = [
   { label: "O nás", href: "/about" },
@@ -13,6 +17,9 @@ const footerLinks = [
 ];
 
 export function SiteFooter() {
+  const pathname = usePathname();
+  const currentLocale = getLocaleFromPathname(pathname);
+
   return (
     <footer className="bg-[#171b1c] px-5 pb-9 pt-10 text-center">
       <div className="mx-auto flex max-w-5xl flex-col items-center">
@@ -42,7 +49,7 @@ export function SiteFooter() {
           {footerLinks.map((link) => (
             <Link
               key={link.label}
-              href={link.href}
+              href={localizeHref(link.href, currentLocale)}
               className="transition hover:text-[#f0c86d]"
             >
               {link.label}

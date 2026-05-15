@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   AnimatePresence,
   LazyMotion,
@@ -10,6 +11,12 @@ import {
   domAnimation,
   m,
 } from "framer-motion";
+import {
+  getLocaleFromPathname,
+  localizeHref,
+  localizePathname,
+  locales,
+} from "@/i18n";
 import LionMark from "./lion-mark";
 
 const navItems = [
@@ -18,7 +25,8 @@ const navItems = [
   { label: "Cleaning", href: "/cleaning" },
   { label: "Workforce", href: "/workforce" },
   { label: "Contact", href: "/contact" },
-  { label:" Premium", href:"/premium"}];
+  { label: "Premium", href: "/premium" },
+];
 
 const mobileNavItems = [
   { label: "Home", href: "/" },
@@ -66,6 +74,9 @@ type SiteNavbarProps = {
 
 export function SiteNavbar({ ctaHref = "/contact#formular" }: SiteNavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const currentLocale = getLocaleFromPathname(pathname);
+  const localizedHref = (href: string) => localizeHref(href, currentLocale);
 
   useEffect(() => {
     if (!isMenuOpen) {
@@ -99,7 +110,7 @@ export function SiteNavbar({ ctaHref = "/contact#formular" }: SiteNavbarProps) {
         >
           <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
             <Link
-              href="/"
+              href={localizedHref("/")}
               className={`flex items-center gap-3 text-[#c88b16] transition-opacity md:opacity-100 ${
                 isMenuOpen ? "opacity-0" : "opacity-100"
               }`}
@@ -120,13 +131,29 @@ export function SiteNavbar({ ctaHref = "/contact#formular" }: SiteNavbarProps) {
             </Link>
             <div className="hidden items-center gap-7 text-sm font-bold text-white/80 md:flex">
               {navItems.map((item) => (
-                <Link key={item.label} href={item.href}>
+                <Link key={item.label} href={localizedHref(item.href)}>
                   {item.label}
                 </Link>
               ))}
             </div>
+            <div className="hidden items-center rounded-md border border-[#d0a24d]/30 p-0.5 text-xs font-black uppercase tracking-[0.08em] text-[#d0a24d] md:flex">
+              {locales.map((locale) => (
+                <Link
+                  key={locale}
+                  href={localizePathname(pathname, locale)}
+                  aria-current={locale === currentLocale ? "true" : undefined}
+                  className={`rounded px-2.5 py-1 transition ${
+                    locale === currentLocale
+                      ? "bg-[#d0a24d] text-[#171b1c]"
+                      : "hover:bg-[#d0a24d]/10 hover:text-[#f0c86d]"
+                  }`}
+                >
+                  {locale}
+                </Link>
+              ))}
+            </div>
             <Link
-              href={ctaHref}
+              href={localizedHref(ctaHref)}
               className="hidden rounded-md bg-[#bd7f09] px-4 py-2 text-sm font-extrabold text-white shadow-[0_10px_24px_rgba(189,127,9,.32)] transition hover:bg-[#a96f05] md:inline-flex"
             >
               Quick Price Estimate
@@ -197,7 +224,7 @@ export function SiteNavbar({ ctaHref = "/contact#formular" }: SiteNavbarProps) {
                     variants={mobileMenuItemVariants}
                   >
                     <Link
-                      href={item.href}
+                      href={localizedHref(item.href)}
                       className="block text-2xl font-black uppercase tracking-[0.14em] transition-colors duration-300 hover:text-[#f0c86d]"
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -206,6 +233,27 @@ export function SiteNavbar({ ctaHref = "/contact#formular" }: SiteNavbarProps) {
                   </m.div>
                 ))}
               </nav>
+
+              <m.div
+                variants={mobileMenuItemVariants}
+                className="mt-10 flex items-center rounded-md border border-[#d0a24d]/30 p-1 text-sm font-black uppercase tracking-[0.12em]"
+              >
+                {locales.map((locale) => (
+                  <Link
+                    key={locale}
+                    href={localizePathname(pathname, locale)}
+                    aria-current={locale === currentLocale ? "true" : undefined}
+                    className={`rounded px-4 py-2 transition ${
+                      locale === currentLocale
+                        ? "bg-[#d0a24d] text-[#171b1c]"
+                        : "hover:bg-[#d0a24d]/10 hover:text-[#f0c86d]"
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {locale}
+                  </Link>
+                ))}
+              </m.div>
 
               <m.div variants={mobileMenuItemVariants}>
                 <button
