@@ -3,8 +3,6 @@ import {gyre_adventor, manrope, space_grotesk} from '@/fonts';
 import { CornerRightUp } from "lucide-react";
 import {
   MotionArticle,
-  MotionBlock,
-  MotionFeatureCard,
   MotionHeroBackground,
   MotionHeroItem,
   MotionHeroTitle,
@@ -289,7 +287,7 @@ export default function Home() {
 
           <MotionLink
             id="estimate"
-            href="#contact"
+            href="/contact"
             delay={0.66}
             className="mt-14 inline-flex min-h-14 w-full max-w-sm items-center justify-center rounded-md bg-[#bd7f09] px-8 text-base font-black text-white shadow-[0_18px_34px_rgba(57,36,3,.38)] transition hover:bg-[#a96f05]"
           >
@@ -346,65 +344,6 @@ export default function Home() {
               </MotionArticle>
             ))}
           </div>
-        </div>
-      </MotionSection>
-
-      <MotionSection id="over-ons" className="bg-white px-5 py-20">
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.05fr_.95fr] md:items-center">
-          <MotionBlock>
-            <p className="text-sm font-black uppercase tracking-[0.16em] text-[#bd7f09]">
-              About Us
-            </p>
-            <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">
-              Reliable delivery for real estate in the Netherlands.
-            </h2>
-            <p className="mt-6 text-lg font-semibold leading-8 text-[#505155]">
-              Since 2000, Pluto Prime has worked on renovations for homes,
-              apartments, and bathrooms. Our experience comes from the
-              Netherlands, Belgium, France, Germany, and Slovakia, with the
-              same focus: clear communication, quality, and long-term
-              relationships.
-            </p>
-          </MotionBlock>
-          <div className="grid grid-cols-2 gap-4">
-            {["20+ years of experience", "Turnkey bathrooms", "Flexible teams", "Clear planning"].map(
-              (item, index) => (
-                <MotionFeatureCard
-                  key={item}
-                  delay={index * 0.08}
-                  className="rounded-lg border border-[#ead8b7] bg-[#fbf8f3] p-5"
-                >
-                  <p className="text-xl font-black text-[#bd7f09]">✓</p>
-                  <p className="mt-3 text-lg font-black leading-tight">
-                    {item}
-                  </p>
-                </MotionFeatureCard>
-              ),
-            )}
-          </div>
-        </div>
-      </MotionSection>
-
-      <MotionSection
-        id="contact"
-        className="bg-[#171b1c] px-5 py-20 text-white"
-      >
-        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_auto] md:items-center">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.16em] text-[#d69c24]">
-              Contact
-            </p>
-            <h2 className="mt-3 max-w-2xl text-4xl font-black leading-tight">
-              Send photos and a short description. We will help you think
-              through the best approach.
-            </h2>
-          </div>
-          <MotionLink
-            href="mailto:info@plutoprime.nl?subject=Quick%20price%20estimate"
-            className="inline-flex min-h-14 items-center justify-center rounded-md bg-[#bd7f09] px-8 text-base font-black text-white shadow-[0_18px_34px_rgba(0,0,0,.28)] transition hover:bg-[#a96f05]"
-          >
-            Request a Price Estimate
-          </MotionLink>
         </div>
       </MotionSection>
 
