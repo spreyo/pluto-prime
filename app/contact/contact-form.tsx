@@ -337,7 +337,7 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
         <button
           type="submit"
           disabled={isPending || isSubmitting}
-          className="mt-7 inline-flex min-h-14 w-full items-center justify-center rounded-md bg-[linear-gradient(135deg,#ECC560_0%,#FFD76A_100%)] px-7 text-base font-black uppercase tracking-[0.14em] text-black shadow-[0_8px_10px_rgba(0,0,0,.3)] transition hover:brightness-105 active:scale-[.99] disabled:cursor-not-allowed disabled:opacity-65"
+          className="mt-7 inline-flex min-h-14 w-full items-center justify-center rounded-md bg-[linear-gradient(135deg,#ECC560_0%,#FFD76A_100%)] px-7 text-base font-black uppercase tracking-[0.14em] text-black shadow-[0_8px_10px_rgba(0,0,0,.3)] transition hover:brightness-105 active:scale-[.99] disabled:cursor-not-allowed disabled:bg-none disabled:bg-[#6b6b6b] disabled:text-black/60 disabled:shadow-none disabled:hover:brightness-100 disabled:active:scale-100"
         >
           {form.submit}
         </button>
