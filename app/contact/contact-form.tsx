@@ -4,7 +4,11 @@ import Script from "next/script";
 import { useActionState, useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type { Dictionary } from "@/dictionaries";
-import { submitContactForm, type ContactFormState } from "./actions";
+import {
+  submitContactForm,
+  type ContactFormState,
+  type ContactFormStatusCode,
+} from "./actions";
 
 declare global {
   interface Window {
@@ -35,7 +39,7 @@ const countryOptions = [
 
 const initialState: ContactFormState = {
   ok: false,
-  message: "",
+  code: "idle",
 };
 
 function getDetectedPrefix() {
@@ -93,8 +97,15 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
   const [hasEditedPhonePrefix, setHasEditedPhonePrefix] = useState(false);
   const [phone, setPhone] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [clientError, setClientError] = useState("");
+  const [clientErrorCode, setClientErrorCode] =
+    useState<ContactFormStatusCode>("idle");
   const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const statusMessage =
+    clientErrorCode !== "idle"
+      ? form.status[clientErrorCode]
+      : state.code !== "idle"
+        ? form.status[state.code]
+        : "";
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -118,7 +129,7 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
 
     event.preventDefault();
     setIsSubmitting(true);
-    setClientError("");
+    setClientErrorCode("idle");
 
     try {
       const token = await getRecaptchaToken(recaptchaSiteKey);
@@ -129,9 +140,7 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
 
       formRef.current?.requestSubmit();
     } catch {
-      setClientError(
-        "Overenie reCAPTCHA sa nepodarilo načítať. Skúste to prosím znova.",
-      );
+      setClientErrorCode("recaptchaFailed");
       setIsSubmitting(false);
     }
   }
@@ -154,11 +163,7 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
         <Script
           src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
           strategy="afterInteractive"
-          onError={() =>
-            setClientError(
-              "Overenie reCAPTCHA sa nepodarilo načítať. Skúste to prosím znova.",
-            )
-          }
+          onError={() => setClientErrorCode("recaptchaFailed")}
         />
       ) : null}
 
@@ -324,13 +329,15 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
           />
         </div>
 
-        {clientError || state.message ? (
+        {statusMessage ? (
           <p
             className={`text-center text-sm font-bold ${
-              !clientError && state.ok ? "text-[#ECC560]" : "text-red-300"
+              clientErrorCode === "idle" && state.ok
+                ? "text-[#ECC560]"
+                : "text-red-300"
             }`}
           >
-            {clientError || state.message}
+            {statusMessage}
           </p>
         ) : null}
 

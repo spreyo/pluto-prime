@@ -175,6 +175,16 @@ export const nl = {
       message: "Popis projektu",
       messagePlaceholder: "Povedzte nám viac o vašich požiadavkách",
       submit: "Odoslať",
+      status: {
+        idle: "",
+        success: "Ďakujeme, správa bola odoslaná.",
+        ipRateLimited: "Príliš veľa pokusov. Skúste to prosím neskôr.",
+        recaptchaFailed:
+          "Overenie formulára zlyhalo. Skúste to prosím znova.",
+        validationFailed: "Skontrolujte prosím vyplnené údaje.",
+        emailPhoneRateLimited:
+          "Formulár bol odoslaný príliš rýchlo po sebe.",
+      },
     },
   },
   about: {

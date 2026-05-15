@@ -3,7 +3,7 @@
 import { headers } from "next/headers";
 import { Resend } from "resend";
 
-const resend = new Resend("re_eftZaWc4_Nhc3CLxiZrBWtihFb5dZxA1T");
+const resend = new Resend("re_ipkfX76n_2njb1iAifiD4SduUxdPfTAD3");
 
 type ContactEmailData = {
   meno: string;
@@ -12,9 +12,17 @@ type ContactEmailData = {
   sprava: string;
 };
 
+export type ContactFormStatusCode =
+  | "idle"
+  | "success"
+  | "ipRateLimited"
+  | "recaptchaFailed"
+  | "validationFailed"
+  | "emailPhoneRateLimited";
+
 export type ContactFormState = {
   ok: boolean;
-  message: string;
+  code: ContactFormStatusCode;
 };
 
 const emailPhoneSubmissions = new Map<string, number>();
@@ -41,9 +49,9 @@ function sendEmail({ meno, email, telefon, sprava }: ContactEmailData) {
     .replaceAll("{{sprava}}", escapeHtml(sprava));
 
   return resend.emails.send({
-    from: "onboarding@resend.dev",
-    to: "spreyyo@gmail.com",
-    subject: "Pluto Prime contact form email",
+    from: "dev@vktr.me",
+    to: "musicgamermail@gmail.com",
+    subject: `PLUTO PRIME - Nový dopyt - ${meno}`,
     html,
   });
 }
@@ -173,7 +181,7 @@ export async function submitContactForm(
   if (isIpRateLimited(ip)) {
     return {
       ok: false,
-      message: "Príliš veľa pokusov. Skúste to prosím neskôr.",
+      code: "ipRateLimited",
     };
   }
 
@@ -190,7 +198,7 @@ export async function submitContactForm(
   const combinedPhoneDigits = combinedPhone.replace(/\D/g, "");
 
   if (honeypot) {
-    return { ok: true, message: "Ďakujeme, správa bola odoslaná." };
+    return { ok: true, code: "success" };
   }
 
   const recaptchaPassed = await verifyRecaptcha(recaptchaToken, ip);
@@ -198,7 +206,7 @@ export async function submitContactForm(
   if (!recaptchaPassed) {
     return {
       ok: false,
-      message: "Overenie formulára zlyhalo. Skúste to prosím znova.",
+      code: "recaptchaFailed",
     };
   }
 
@@ -213,7 +221,7 @@ export async function submitContactForm(
   ) {
     return {
       ok: false,
-      message: "Skontrolujte prosím vyplnené údaje.",
+      code: "validationFailed",
     };
   }
 
@@ -222,7 +230,7 @@ export async function submitContactForm(
   if (isEmailPhoneRateLimited(rateLimitKey)) {
     return {
       ok: false,
-      message: "Formulár bol odoslaný príliš rýchlo po sebe.",
+      code: "emailPhoneRateLimited",
     };
   }
 
@@ -235,6 +243,6 @@ export async function submitContactForm(
 
   return {
     ok: true,
-    message: "Ďakujeme, správa bola odoslaná.",
+    code: "success",
   };
 }
