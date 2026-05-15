@@ -151,6 +151,7 @@ export default function WorkforcePage() {
                 loading="lazy"
                 sizes="(min-width: 1024px) 42vw, 100vw"
                 className="aspect-[1.45/1] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.035]"
+                preload={true}
               />
             </MotionBlock>
           </div>

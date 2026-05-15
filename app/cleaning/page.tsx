@@ -102,6 +102,7 @@ export default function CleaningPage() {
               priority
               sizes="100vw"
               className="object-cover opacity-30"
+              
             />
           </MotionHeroBackground>
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(22,25,26,.18)_0%,rgba(22,25,26,.32)_48%,#1b1f20_100%)]" />

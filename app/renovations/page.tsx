@@ -104,6 +104,7 @@ export default function RenovationsPage() {
             priority
             sizes="100vw"
             className="object-cover opacity-30"
+            preload={true}
           />
         </MotionHeroBackground>
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(22,25,26,.0)_0%,rgba(22,25,26,.0)_48%,#1b1f20_100%)]" />

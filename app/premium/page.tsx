@@ -76,7 +76,7 @@ export default function PremiumPage() {
               loop
               muted
               playsInline
-              preload="metadata"
+              preload="auto"
             >
               <source src="/img/luxury.mp4" type="video/mp4" />
             </video>

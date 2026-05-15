@@ -17,7 +17,7 @@ const navItems = [
   { label: "Renovations", href: "/renovations" },
   { label: "Cleaning", href: "/cleaning" },
   { label: "Workforce", href: "/workforce" },
-  { label: "Contact", href: "/contact#formular" },
+  { label: "Contact", href: "/contact" },
   { label:" Premium", href:"/premium"}];
 
 const mobileNavItems = [
@@ -64,7 +64,7 @@ type SiteNavbarProps = {
   ctaHref?: string;
 };
 
-export function SiteNavbar({ ctaHref = "/contact" }: SiteNavbarProps) {
+export function SiteNavbar({ ctaHref = "/contact#formular" }: SiteNavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
