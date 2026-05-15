@@ -17,21 +17,22 @@ import {
   localizePathname,
   locales,
 } from "@/i18n";
+import { getClientDictionary } from "@/dictionaries";
 import LionMark from "./lion-mark";
 
 const navItems = [
-  { label: "About Us", href: "/about" },
-  { label: "Renovations", href: "/renovations" },
-  { label: "Cleaning", href: "/cleaning" },
-  { label: "Workforce", href: "/workforce" },
-  { label: "Contact", href: "/contact" },
-  { label: "Premium", href: "/premium" },
-];
+  { key: "about", href: "/about" },
+  { key: "renovations", href: "/renovations" },
+  { key: "cleaning", href: "/cleaning" },
+  { key: "workforce", href: "/workforce" },
+  { key: "contact", href: "/contact" },
+  { key: "premium", href: "/premium" },
+] as const;
 
 const mobileNavItems = [
-  { label: "Home", href: "/" },
+  { key: "home", href: "/" },
   ...navItems,
-];
+] as const;
 
 const menuEase = [0.16, 1, 0.3, 1] as const;
 
@@ -76,6 +77,7 @@ export function SiteNavbar({ ctaHref = "/contact#formular" }: SiteNavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const currentLocale = getLocaleFromPathname(pathname);
+  const dictionary = getClientDictionary(currentLocale);
   const localizedHref = (href: string) => localizeHref(href, currentLocale);
 
   useEffect(() => {
@@ -131,8 +133,8 @@ export function SiteNavbar({ ctaHref = "/contact#formular" }: SiteNavbarProps) {
             </Link>
             <div className="hidden items-center gap-7 text-sm font-bold text-white/80 md:flex">
               {navItems.map((item) => (
-                <Link key={item.label} href={localizedHref(item.href)}>
-                  {item.label}
+                <Link key={item.key} href={localizedHref(item.href)}>
+                  {dictionary.nav[item.key]}
                 </Link>
               ))}
             </div>
@@ -156,7 +158,7 @@ export function SiteNavbar({ ctaHref = "/contact#formular" }: SiteNavbarProps) {
               href={localizedHref(ctaHref)}
               className="hidden rounded-md bg-[#bd7f09] px-4 py-2 text-sm font-extrabold text-white shadow-[0_10px_24px_rgba(189,127,9,.32)] transition hover:bg-[#a96f05] md:inline-flex"
             >
-              Quick Price Estimate
+              {dictionary.nav.cta}
             </Link>
             <button
               type="button"
@@ -220,7 +222,7 @@ export function SiteNavbar({ ctaHref = "/contact#formular" }: SiteNavbarProps) {
               <nav className="mt-14 flex flex-col items-center gap-7 text-center">
                 {mobileNavItems.map((item) => (
                   <m.div
-                    key={`${item.label}-${item.href}`}
+                    key={`${item.key}-${item.href}`}
                     variants={mobileMenuItemVariants}
                   >
                     <Link
@@ -228,7 +230,7 @@ export function SiteNavbar({ ctaHref = "/contact#formular" }: SiteNavbarProps) {
                       className="block text-2xl font-black uppercase tracking-[0.14em] transition-colors duration-300 hover:text-[#f0c86d]"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {item.label}
+                      {dictionary.nav[item.key]}
                     </Link>
                   </m.div>
                 ))}

@@ -6,19 +6,20 @@ import { Mail, Phone } from "lucide-react";
 import LionMark from "./lion-mark";
 import { space_grotesk } from "@/fonts";
 import { getLocaleFromPathname, localizeHref } from "@/i18n";
+import { getClientDictionary } from "@/dictionaries";
 
 const footerLinks = [
-  { label: "O nás", href: "/about" },
-  { label: "Rekonštrukcie", href: "/renovations" },
-  { label: "Upratovanie", href: "/cleaning" },
-  { label: "Workforce", href: "/workforce" },
-  { label: "Realizácie", href: "/#realizations" },
-  { label: "Kontakt", href: "/contact" },
-];
+  { key: "about", href: "/about" },
+  { key: "renovations", href: "/renovations" },
+  { key: "cleaning", href: "/cleaning" },
+  { key: "workforce", href: "/workforce" },
+  { key: "contact", href: "/contact" },
+] as const;
 
 export function SiteFooter() {
   const pathname = usePathname();
   const currentLocale = getLocaleFromPathname(pathname);
+  const dictionary = getClientDictionary(currentLocale);
 
   return (
     <footer className="bg-[#171b1c] px-5 pb-9 pt-10 text-center">
@@ -48,11 +49,11 @@ export function SiteFooter() {
         <nav className="mt-8 grid grid-cols-3 gap-x-6 gap-y-4 text-xs font-bold text-white/34 sm:flex sm:flex-wrap sm:justify-center sm:gap-x-8">
           {footerLinks.map((link) => (
             <Link
-              key={link.label}
+              key={link.key}
               href={localizeHref(link.href, currentLocale)}
               className="transition hover:text-[#f0c86d]"
             >
-              {link.label}
+              {dictionary.footer[link.key]}
             </Link>
           ))}
         </nav>
@@ -61,7 +62,7 @@ export function SiteFooter() {
       <p className="mt-9 text-sm font-semibold leading-tight tracking-[0.02em] text-white/22">
         2000 - 2026 PLUTO PRIME.
         <br />
-        Všetky práva vyhradené.
+        {dictionary.footer.rights}
       </p>
     </footer>
   );

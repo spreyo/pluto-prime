@@ -12,6 +12,7 @@ import {
   MotionRoot,
   MotionSection,
 } from "../home-motion";
+import { getDictionaryFromParams } from "@/dictionaries";
 
 export const metadata: Metadata = {
   title: "Premium International | Pluto Prime",
@@ -19,23 +20,7 @@ export const metadata: Metadata = {
     "Prémiové riadenie rekonštrukcií a služieb pre klientov so zahraničnými nehnuteľnosťami.",
 };
 
-const benefits = [
-  {
-    title: "Dutch Quality Standards",
-    description: "žiadne pochybnosti o výsledku",
-    icon: Check,
-  },
-  {
-    title: "Global Mobility",
-    description: "sme tam, kde nás potrebujete",
-    icon: Plane,
-  },
-  {
-    title: "Seamless Communication",
-    description: "jeden partner, jedna zodpovednosť, jasný výsledok",
-    icon: Phone,
-  },
-];
+const benefitIcons = [Check, Plane, Phone];
 
 const projectImage =
   "/img/villa.png";
@@ -45,7 +30,14 @@ const goldText =
 
 const goldStroke = "stroke-[url(#premium-gold-gradient)]";
 
-export default function PremiumPage() {
+export default async function PremiumPage({
+  params,
+}: {
+  params?: Promise<{ locale?: string }>;
+}) {
+  const dictionary = await getDictionaryFromParams(params);
+  const page = dictionary.premium;
+
   return (
     <MotionRoot>
       <main className="min-h-screen bg-[#1b1f20] pt-16 text-[#e5e0d8]">
@@ -91,30 +83,23 @@ export default function PremiumPage() {
               delay={0.18}
               className={`mt-4 text-[clamp(1.65rem,8vw,3.65rem)] font-bold uppercase leading-[1.18] tracking-[0.18em] drop-shadow-[0_8px_16px_rgba(0,0,0,.5)] ${space_grotesk.className} ${goldText}`}
             >
-              Premium
+              {page.titleLine1}
               <br />
-              International
+              {page.titleLine2}
             </MotionHeroTitle>
             <MotionHeroItem
               delay={0.28}
               className="mx-auto mt-7 max-w-xl text-[1.45rem] font-extrabold leading-[1.25] tracking-[0.05em] text-white/82 sm:text-3xl"
             >
-              Your Dutch standard, anywhere in the world.
+              {page.subtitle}
             </MotionHeroItem>
             <MotionHeroItem
               delay={0.38}
               className="mx-auto mt-9 max-w-xl space-y-5 text-left text-[1.08rem] font-extrabold leading-[1.22] tracking-[0.02em] text-white/78 sm:text-center sm:text-xl"
             >
-              <p>
-                Kúpili ste nehnuteľnosť v zahraničí a obávate sa o kvalitu
-                miestnych firiem? Komunikácia, termíny a štandardy práce môžu
-                byť v cudzine výzvou.
-              </p>
-              <p>
-                PLUTO Prime vám prináša riešenie bez kompromisov. Náš tím
-                skúsených profesionálov vyšleme priamo k vášmu projektu - či už
-                ide o vilu v Španielsku, apartmán v Karibiku alebo dom v Alpách.
-              </p>
+              {page.intro.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </MotionHeroItem>
           </div>
         </section>
@@ -124,8 +109,7 @@ export default function PremiumPage() {
             <MotionBlock className="mx-auto max-w-xl text-left lg:pt-8">
               <Globe className={`mx-auto h-16 w-16 stroke-[1.8] lg:mx-0 ${goldStroke}`} />
               <p className="mt-8 text-[1.05rem] font-extrabold leading-[1.22] tracking-[0.02em] text-white/74">
-                Garantujeme vám precíznosť, na ktorú ste zvyknutí v Holandsku, s
-                transparentným riadením, ktorému rozumiete.
+                {page.main}
               </p>
             </MotionBlock>
 
@@ -151,13 +135,13 @@ export default function PremiumPage() {
             <div className="text-center">
               <h2 className={`inline-flex items-center gap-3 text-2xl font-extrabold sm:text-3xl ${goldText}`}>
                 <CircleDot className={`h-7 w-7 ${goldStroke}`} />
-                Prečo si vybrať nás
+                {page.whyHeading}
               </h2>
             </div>
 
             <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {benefits.map((benefit, index) => {
-                const Icon = benefit.icon;
+              {page.benefits.map((benefit, index) => {
+                const Icon = benefitIcons[index];
 
                 return (
                   <MotionBlock
@@ -182,19 +166,19 @@ export default function PremiumPage() {
         <MotionSection className="bg-[#fbf8f3] px-6 py-14 text-[#171b1c] sm:px-10 sm:py-20">
           <MotionBlock className="mx-auto flex max-w-3xl flex-col items-center text-center">
             <p className="text-base font-extrabold uppercase tracking-[0.02em] text-[#bd7f09]">
-              Prémiová ponuka
+              {page.ctaEyebrow}
             </p>
             <h2 className="mt-1 text-3xl font-extrabold leading-[1.03] tracking-[0.01em] sm:text-5xl">
-              Váš projekt, kdekoľvek na svete
+              {page.ctaTitle}
             </h2>
             <p className="mt-2 max-w-lg text-base font-bold leading-tight text-[#171b1c] sm:text-lg">
-              Kontaktujte nás a navrhneme vám riešenie na mieru.
+              {page.ctaText}
             </p>
             <Link
               href="/contact"
               className="mt-9 inline-flex min-h-14 w-full max-w-md items-center justify-center rounded-md bg-[#c9963d] px-7 text-base font-extrabold text-white shadow-[0_8px_10px_rgba(0,0,0,.3)] transition hover:bg-[#ad7a21]"
             >
-              Kontaktujte nás
+              {dictionary.servicePage.contactButton}
             </Link>
           </MotionBlock>
         </MotionSection>

@@ -11,6 +11,7 @@ import {
   MotionRoot,
   MotionSection,
 } from "../home-motion";
+import { getDictionaryFromParams } from "@/dictionaries";
 
 export const metadata: Metadata = {
   title: "Kontakt | Pluto Prime",
@@ -99,7 +100,14 @@ function isRateLimited(key: string) {
   return false;
 }
 
-export default function ContactPage() {
+export default async function ContactPage({
+  params,
+}: {
+  params?: Promise<{ locale?: string }>;
+}) {
+  const dictionary = await getDictionaryFromParams(params);
+  const page = dictionary.contact;
+
   async function handleContactForm(formData: FormData) {
     "use server";
 
@@ -143,7 +151,6 @@ export default function ContactPage() {
       sprava: message,
     });
   }
-
   return (
     <MotionRoot>
       <main className="min-h-screen bg-[#1b1f20] px-6 pb-20 pt-16 text-[#e5e0d8] sm:px-10">
@@ -175,19 +182,19 @@ export default function ContactPage() {
             delay={0.18}
             className={`mt-5 text-[clamp(1.7rem,8vw,3.7rem)] font-bold uppercase leading-none tracking-[0.18em] drop-shadow-[0_8px_16px_rgba(0,0,0,.5)] ${space_grotesk.className} ${goldText}`}
           >
-            Kontakt
+            {page.title}
           </MotionHeroTitle>
 
           <MotionHeroItem
             delay={0.3}
             className="mt-7 max-w-xl text-[1.1rem] font-extrabold leading-[1.35] tracking-[0.04em] text-white/78 sm:text-xl"
           >
-            Máte otázku alebo projekt? Ozvite sa nám - radi pomôžeme.
+            {page.intro}
           </MotionHeroItem>
 
           <MotionHeroItem delay={0.4} className="mt-7">
             <h2 className="text-xl font-extrabold uppercase tracking-[0.08em] text-white/82">
-              Kontaktné údaje
+              {page.detailsHeading}
             </h2>
             <div className="mt-5 space-y-2 text-xl font-medium leading-tight text-white/86 sm:text-2xl">
               <a
@@ -227,14 +234,14 @@ export default function ContactPage() {
                   htmlFor="firstName"
                   className="text-sm font-extrabold tracking-[0.08em] text-[#ECC560]"
                 >
-                  Meno
+                  {page.form.firstName}
                 </label>
                 <input
                   id="firstName"
                   name="firstName"
                   type="text"
                   autoComplete="given-name"
-                  placeholder="Vaše meno"
+                  placeholder={page.form.firstNamePlaceholder}
                   required
                   maxLength={80}
                   className={inputClassName}
@@ -246,14 +253,14 @@ export default function ContactPage() {
                   htmlFor="lastName"
                   className="text-sm font-extrabold tracking-[0.08em] text-[#ECC560]"
                 >
-                  Priezvisko
+                  {page.form.lastName}
                 </label>
                 <input
                   id="lastName"
                   name="lastName"
                   type="text"
                   autoComplete="family-name"
-                  placeholder="Vaše priezvisko"
+                  placeholder={page.form.lastNamePlaceholder}
                   maxLength={80}
                   className={inputClassName}
                 />
@@ -264,14 +271,14 @@ export default function ContactPage() {
                   htmlFor="email"
                   className="text-sm font-extrabold tracking-[0.08em] text-[#ECC560]"
                 >
-                  Email
+                  {page.form.email}
                 </label>
                 <input
                   id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
-                  placeholder="vas@email.sk"
+                  placeholder={page.form.emailPlaceholder}
                   required
                   maxLength={254}
                   className={inputClassName}
@@ -280,7 +287,7 @@ export default function ContactPage() {
 
               <div>
                 <p className="text-sm font-extrabold tracking-[0.08em] text-[#ECC560]">
-                  Telefón
+                  {page.form.phone}
                 </p>
                 <div className="mt-1.5 grid grid-cols-[6.5rem_1fr] gap-3">
                   <div>
@@ -292,7 +299,7 @@ export default function ContactPage() {
                       name="phonePrefix"
                       type="tel"
                       autoComplete="tel-country-code"
-                      placeholder="+31"
+                      placeholder={page.form.prefixPlaceholder}
                       required
                       maxLength={5}
                       pattern="^\+\d{1,4}$"
@@ -309,7 +316,7 @@ export default function ContactPage() {
                       name="phone"
                       type="tel"
                       autoComplete="tel-national"
-                      placeholder="612 345 678"
+                      placeholder={page.form.phonePlaceholder}
                       required
                       minLength={5}
                       maxLength={24}
@@ -326,13 +333,13 @@ export default function ContactPage() {
                   htmlFor="message"
                   className="text-sm font-extrabold tracking-[0.08em] text-[#ECC560]"
                 >
-                  Popis projektu
+                  {page.form.message}
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   rows={6}
-                  placeholder="Povedzte nám viac o vašich požiadavkách"
+                  placeholder={page.form.messagePlaceholder}
                   required
                   minLength={10}
                   maxLength={2000}
@@ -344,7 +351,7 @@ export default function ContactPage() {
                 type="submit"
                 className="mt-7 inline-flex min-h-14 w-full items-center justify-center rounded-md bg-[linear-gradient(135deg,#ECC560_0%,#FFD76A_100%)] px-7 text-base font-black uppercase tracking-[0.14em] text-black shadow-[0_8px_10px_rgba(0,0,0,.3)] transition hover:brightness-105 active:scale-[.99]"
               >
-                Odoslať
+                {page.form.submit}
               </button>
             </form>
           </MotionBlock>

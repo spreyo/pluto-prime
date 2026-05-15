@@ -20,6 +20,7 @@ import {
   MotionRoot,
   MotionSection,
 } from "../home-motion";
+import { getDictionaryFromParams } from "@/dictionaries";
 
 export const metadata: Metadata = {
   title: "Rekonštrukcie | Pluto Prime",
@@ -27,35 +28,12 @@ export const metadata: Metadata = {
     "Kompletné rekonštrukcie bytov, rodinných domov a kúpeľní v Holandsku a zahraničí.",
 };
 
-const services = [
-  {
-    label: "rekonštrukcie kúpeľní na kľúč",
-    icon: Bath,
-  },
-  {
-    label: "kompletné rekonštrukcie bytov a domov",
-    icon: House,
-  },
-  {
-    label: "voda, odpad, elektroinštalácie",
-    icon: Wrench,
-  },
-  {
-    label: "obklady, dlažby, podlahy",
-    icon: Hammer,
-  },
-  {
-    label: "maliarske a dokončovacie práce",
-    icon: PaintRoller,
-  },
-];
-
-const reasons = [
-  "viac ako 20 rokov skúseností",
-  "realizácie v Holandsku a zahraničí",
-  "spoľahlivý a skúsený tím",
-  "rýchla komunikácia a flexibilita",
-  "férové ceny a kvalitné prevedenie",
+const serviceIcons = [
+  Bath,
+  House,
+  Wrench,
+  Hammer,
+  PaintRoller,
 ];
 
 const heroImage =
@@ -72,7 +50,14 @@ const goldText =
 
 const goldStroke = "stroke-[url(#renovations-gold-gradient)]";
 
-export default function RenovationsPage() {
+export default async function RenovationsPage({
+  params,
+}: {
+  params?: Promise<{ locale?: string }>;
+}) {
+  const dictionary = await getDictionaryFromParams(params);
+  const page = dictionary.renovations;
+
   return (
     <MotionRoot>
     <main className="min-h-screen bg-[#1b1f20] pt-16 text-[#e5e0d8]">
@@ -101,7 +86,6 @@ export default function RenovationsPage() {
             src={heroImage}
             alt="Rozpracovaná rekonštrukcia interiéru"
             fill
-            priority
             sizes="100vw"
             className="object-cover opacity-30"
             preload={true}
@@ -117,20 +101,15 @@ export default function RenovationsPage() {
             delay={0.18}
             className={`mt-4 text-[clamp(1.7rem,8vw,3.7rem)] font-bold uppercase leading-none tracking-[0.18em] drop-shadow-[0_8px_16px_rgba(0,0,0,.5)] ${space_grotesk.className} ${goldText}`}
           >
-            Rekonštrukcie
+            {page.title}
           </MotionHeroTitle>
           <MotionHeroItem
             delay={0.3}
             className="mx-auto mt-7 max-w-xl space-y-5 text-left text-[1.08rem] font-extrabold leading-[1.22] tracking-[0.02em] text-white/78 sm:text-center sm:text-xl"
           >
-            <p>
-              Realizujeme kompletné rekonštrukcie bytov, rodinných domov a
-              kúpeľní v Amsterdame, Alkmaare, Groningene a okolí.
-            </p>
-            <p>
-              Zabezpečujeme všetky práce od návrhu až po finálne dokončenie -
-              rýchlo, kvalitne a bez zbytočných komplikácií.
-            </p>
+            {page.intro.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </MotionHeroItem>
         </div>
       </section>
@@ -140,10 +119,7 @@ export default function RenovationsPage() {
           <MotionBlock className="mx-auto max-w-xl text-left lg:pt-8">
             <Bath className={`mx-auto h-16 w-16 stroke-[1.8] lg:mx-0 ${goldStroke}`} />
             <p className="mt-8 text-[1.05rem] font-extrabold leading-[1.22] tracking-[0.02em] text-white/74">
-              Špecializujeme sa najmä na rekonštrukcie kúpeľní na kľúč.
-              Postaráme sa o celý proces vrátane rozvodov vody, odpadu,
-              elektroinštalácií, obkladov a finálnych detailov. Každý projekt
-              prispôsobujeme konkrétnym požiadavkám klienta.
+              {page.bathroom}
             </p>
           </MotionBlock>
 
@@ -171,9 +147,7 @@ export default function RenovationsPage() {
           >
             <House className={`mx-auto h-16 w-16 stroke-[1.8] lg:mx-0 ${goldStroke}`} />
             <p className="mt-8 text-[1.05rem] font-extrabold leading-[1.22] tracking-[0.02em] text-white/74">
-              Ponúkame aj kompletné rekonštrukcie interiérov - od menších
-              úprav až po kompletné prerábky bytov a domov. Dôraz kladieme na
-              funkčnosť, kvalitu prevedenia a dlhodobú spokojnosť.
+              {page.interior}
             </p>
           </MotionBlock>
 
@@ -196,9 +170,7 @@ export default function RenovationsPage() {
           delay={0.08}
           className="mx-auto mt-12 max-w-3xl text-left text-[1rem] font-extrabold leading-[1.22] tracking-[0.02em] text-white/72 sm:text-center"
         >
-          Cenovú ponuku vám vieme pripraviť aj na základe fotiek a krátkeho
-          popisu projektu. V prípade záujmu zabezpečíme aj jednoduchý grafický
-          návrh novej kúpeľne.
+          {page.note}
         </MotionBlock>
 
         <MotionBlock
@@ -207,19 +179,19 @@ export default function RenovationsPage() {
         >
           <h2 className={`inline-flex items-center gap-3 text-xl font-extrabold ${goldText}`}>
             <Wrench className={`h-6 w-6 ${goldStroke}`} />
-            Naše služby
+            {dictionary.servicePage.servicesHeading}
           </h2>
           <ul className="mx-auto mt-6 grid max-w-4xl gap-x-10 gap-y-4 text-left text-[1rem] font-extrabold leading-tight tracking-[0.02em] text-white/72 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => {
-              const Icon = service.icon;
+            {page.services.map((service, index) => {
+              const Icon = serviceIcons[index];
 
               return (
                 <li
-                  key={service.label}
+                  key={service}
                   className="flex min-w-0 items-start gap-3"
                 >
                   <Icon className={`mt-0.5 h-5 w-5 shrink-0 stroke-[2.1] ${goldStroke}`} />
-                  <span>{service.label}</span>
+                  <span>{service}</span>
                 </li>
               );
             })}
@@ -231,10 +203,10 @@ export default function RenovationsPage() {
         <div className="flex w-fit max-w-full flex-col items-center">
           <h2 className={`inline-flex items-center gap-3 text-xl font-extrabold ${goldText}`}>
             <CircleDot className={`h-6 w-6 ${goldStroke}`} />
-            Prečo si vybrať nás
+            {dictionary.servicePage.whyHeading}
           </h2>
           <ul className="mx-auto mt-7 w-fit max-w-full space-y-4 text-left text-[1.05rem] font-extrabold leading-tight tracking-[0.02em] text-white/74">
-            {reasons.map((reason) => (
+            {page.reasons.map((reason) => (
               <li key={reason} className="flex items-start gap-3">
                 <Check className={`mt-0.5 h-5 w-5 shrink-0 stroke-[2.4] ${goldStroke}`} />
                 <span>{reason}</span>
@@ -247,19 +219,19 @@ export default function RenovationsPage() {
       <MotionSection className="bg-[#fbf8f3] px-6 py-14 text-[#171b1c] sm:px-10 sm:py-20">
         <MotionBlock className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <p className="text-base font-extrabold uppercase tracking-[0.02em] text-[#bd7f09]">
-            Získajte cenovú ponuku
+            {dictionary.servicePage.offerEyebrow}
           </p>
           <h2 className="mt-1 text-3xl font-extrabold leading-[1.03] tracking-[0.01em] sm:text-5xl">
-            Začnime váš projekt
+            {dictionary.servicePage.projectStart}
           </h2>
           <p className="mt-2 max-w-lg text-base font-bold leading-tight text-[#171b1c] sm:text-lg">
-            Stačí nám poslať fotky a popis - ozveme sa vám s riešením.
+            {page.ctaText}
           </p>
           <Link
             href="mailto:info@plutoprime.nl?subject=Cenova%20ponuka%20-%20rekonstrukcia"
             className="mt-9 inline-flex min-h-14 w-full max-w-md items-center justify-center rounded-md bg-[#c9963d] px-7 text-base font-extrabold text-white shadow-[0_8px_10px_rgba(0,0,0,.3)] transition hover:bg-[#ad7a21]"
           >
-            Vyžiadajte si cenovú ponuku
+            {page.ctaButton}
           </Link>
         </MotionBlock>
       </MotionSection>

@@ -13,32 +13,22 @@ import {
   MotionServiceItem,
 } from "./home-motion";
 import LionMark from "./components/lion-mark";
-const services = [
+import { getDictionaryFromParams } from "@/dictionaries";
+
+const serviceAssets = [
   {
-    eyebrow: "Renovation",
-    title: "Home & Bathroom",
-    description:
-      "Complete renovations for homes, apartments, and bathrooms, including water, drainage, electrical work, tiling, and finishing.",
     image:
       "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=85",
     alt: "Renovation tools and building materials inside a home",
     href:"/renovations"
   },
   {
-    eyebrow: "Cleaning",
-    title: "Professional Cleaning",
-    description:
-      "Reliable cleaning for homes, hotels, offices, and industrial spaces, planned around your schedule.",
     image:
       "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=85",
     alt: "Professional cleaner working by a window",
     href:"/cleaning"
   },
   {
-    eyebrow: "Workforce",
-    title: "Qualified Personnel",
-    description:
-      "Flexible teams for short and long projects, selected for experience, work ethic, and reliability.",
     image:
       "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=85",
     alt: "Team of professionals discussing a project plan",
@@ -46,10 +36,10 @@ const services = [
   },
 ];
 
-const heroItems = [
-  { label: "Renovations", icon: "renovation", delay: 0.36 },
-  { label: "Cleaning", icon: "cleaning", delay: 0.45 },
-  { label: "Workforce", icon: "workforce", delay: 0.54 },
+const heroItemConfig = [
+  { icon: "renovation", delay: 0.36 },
+  { icon: "cleaning", delay: 0.45 },
+  { icon: "workforce", delay: 0.54 },
 ];
 
 // function LionMark({ className = "" }: { className?: string }) {
@@ -238,7 +228,21 @@ function ServiceIcon({ name }: { name: string }) {
 }
 
 
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params?: Promise<{ locale?: string }>;
+}) {
+  const dictionary = await getDictionaryFromParams(params);
+  const services = serviceAssets.map((service, index) => ({
+    ...service,
+    ...dictionary.home.services[index],
+  }));
+  const heroItems = heroItemConfig.map((item, index) => ({
+    ...item,
+    label: dictionary.home.heroItems[index],
+  }));
+
   return (
     <MotionRoot>
     <main className="min-h-screen bg-[#fbf8f3] text-[#202223]">
@@ -261,7 +265,7 @@ export default function Home() {
           <MotionHeroItem delay={0.27} className="mt-4 flex items-center gap-4 text-[#d89f2a]">
             <MotionRule delay={0.42} className="h-px w-16 bg-current" />
             <p className={`text-lg font-black whitespace-nowrap ${gyre_adventor.className} uppercase tracking-[0.32em]`}>
-              Since 2000
+              {dictionary.home.since}
             </p>
             <MotionRule delay={0.42} className="h-px w-16 bg-current" />
           </MotionHeroItem>
@@ -282,7 +286,7 @@ export default function Home() {
           </div>
 
           <MotionHeroItem delay={0.6} className={`mt-6 text-sm font-semibold ${manrope.className} text-[#d89f2a]`}>
-            Renovations · Cleaning · Workforce
+            {dictionary.home.serviceLine}
           </MotionHeroItem>
 
           <MotionLink
@@ -291,7 +295,7 @@ export default function Home() {
             delay={0.66}
             className="mt-14 inline-flex min-h-14 w-full max-w-sm items-center justify-center rounded-md bg-[#bd7f09] px-8 text-base font-black text-white shadow-[0_18px_34px_rgba(57,36,3,.38)] transition hover:bg-[#a96f05]"
           >
-            Quick Price Estimate
+            {dictionary.home.cta}
           </MotionLink>
         </div>
       </section>
@@ -300,10 +304,10 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
             <p className="text-sm font-black uppercase tracking-[0.16em] text-[#bd7f09]">
-              Services
+              {dictionary.home.servicesEyebrow}
             </p>
             <h2 className="mt-2 text-4xl font-black tracking-[0.08em] text-[#202223] sm:text-5xl">
-              Our Expertise
+              {dictionary.home.servicesTitle}
             </h2>
           </div>
 
@@ -338,7 +342,7 @@ export default function Home() {
                     href={service.href}
                     className="mt-4 inline-flex text-lg font-black text-[#bd7f09] transition hover:text-[#8f5f05]"
                   >
-                    View More <CornerRightUp/>
+                    {dictionary.home.viewMore} <CornerRightUp/>
                   </a>
                 </div>
               </MotionArticle>
