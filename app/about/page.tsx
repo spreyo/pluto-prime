@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 };
 
 const stats = [
-  { target: 25, suffix: "+", label: "rokov" },
-  { target: 5, label: "krajín" },
+  { target: 25, suffix: "+", label: "years" },
+  { target: 5, label: "countries" },
 ];
 
 
