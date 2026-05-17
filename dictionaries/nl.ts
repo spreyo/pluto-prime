@@ -178,11 +178,11 @@ export const nl = {
         idle: "",
         success: "Bedankt, het bericht is verzonden.",
         ipRateLimited: "Te veel pogingen. Probeer het later nog eens.",
-        recaptchaFailed:
-          "Het formulier kon niet worden geverifieerd. Probeer het alstublieft nog eens.",
         validationFailed: "Controleer alstublieft de ingevulde gegevens.",
         emailPhoneRateLimited:
           "Het formulier is te snel achter elkaar verzonden.",
+        submitFailed:
+          "Het formulier kon niet worden verzonden. Probeer het alstublieft nog eens.",
       },
     },
   },

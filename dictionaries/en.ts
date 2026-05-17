@@ -178,11 +178,10 @@ export const en = {
         idle: "",
         success: "Thank you, your message has been sent.",
         ipRateLimited: "Too many attempts. Please try again later.",
-        recaptchaFailed:
-          "Form verification failed. Please try again.",
         validationFailed: "Please check the filled-in details.",
         emailPhoneRateLimited:
           "The form was submitted too quickly after the previous attempt.",
+        submitFailed: "The form could not be sent. Please try again.",
       },
     },
   },

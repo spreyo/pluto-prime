@@ -1,23 +1,9 @@
 "use client";
 
-import Script from "next/script";
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type { Dictionary } from "@/dictionaries";
-import {
-  submitContactForm,
-  type ContactFormState,
-  type ContactFormStatusCode,
-} from "./actions";
-
-declare global {
-  interface Window {
-    grecaptcha?: {
-      ready(callback: () => void): void;
-      execute(siteKey: string, options: { action: string }): Promise<string>;
-    };
-  }
-}
+import type { ContactFormState, ContactFormStatusCode } from "./contact-status";
 
 type ContactFormProps = {
   form: Dictionary["contact"]["form"];
@@ -69,29 +55,9 @@ function formatPhoneNumber(value: string) {
   return groups.join(" ");
 }
 
-function getRecaptchaToken(siteKey: string) {
-  return new Promise<string>((resolve, reject) => {
-    if (!window.grecaptcha) {
-      reject(new Error("reCAPTCHA is not loaded"));
-      return;
-    }
-
-    window.grecaptcha.ready(() => {
-      window.grecaptcha
-        ?.execute(siteKey, { action: "contact_form" })
-        .then(resolve)
-        .catch(reject);
-    });
-  });
-}
-
 export function ContactForm({ form, inputClassName }: ContactFormProps) {
-  const [state, formAction, isPending] = useActionState(
-    submitContactForm,
-    initialState,
-  );
   const formRef = useRef<HTMLFormElement>(null);
-  const recaptchaTokenRef = useRef<HTMLInputElement>(null);
+  const [state, setState] = useState<ContactFormState>(initialState);
   const [phonePrefix, setPhonePrefix] = useState("+31");
   const [detectedPhonePrefix, setDetectedPhonePrefix] = useState("+31");
   const [hasEditedPhonePrefix, setHasEditedPhonePrefix] = useState(false);
@@ -99,7 +65,8 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [clientErrorCode, setClientErrorCode] =
     useState<ContactFormStatusCode>("idle");
-  const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const contactEndpoint =
+    process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/api/contact";
   const statusMessage =
     clientErrorCode !== "idle"
       ? form.status[clientErrorCode]
@@ -119,67 +86,44 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
   }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    if (!recaptchaSiteKey) {
-      return;
-    }
-
-    if (recaptchaTokenRef.current?.value) {
-      return;
-    }
-
     event.preventDefault();
     setIsSubmitting(true);
     setClientErrorCode("idle");
+    setState(initialState);
 
     try {
-      const token = await getRecaptchaToken(recaptchaSiteKey);
+      const currentForm = event.currentTarget;
+      const formData = new FormData(currentForm);
+      const response = await fetch(contactEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      });
 
-      if (recaptchaTokenRef.current) {
-        recaptchaTokenRef.current.value = token;
+      if (!response.ok) {
+        throw new Error("Contact request failed");
       }
 
-      formRef.current?.requestSubmit();
+      const result = (await response.json()) as ContactFormState;
+
+      setState(result);
     } catch {
-      setClientErrorCode("recaptchaFailed");
+      setClientErrorCode("submitFailed");
+    } finally {
       setIsSubmitting(false);
     }
   }
 
-  useEffect(() => {
-    const task = window.setTimeout(() => {
-      setIsSubmitting(false);
-    }, 0);
-
-    if (recaptchaTokenRef.current) {
-      recaptchaTokenRef.current.value = "";
-    }
-
-    return () => window.clearTimeout(task);
-  }, [state]);
-
   return (
     <>
-      {recaptchaSiteKey ? (
-        <Script
-          src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
-          strategy="afterInteractive"
-          onError={() => setClientErrorCode("recaptchaFailed")}
-        />
-      ) : null}
-
       <form
         ref={formRef}
         className="space-y-4"
-        action={formAction}
         id="formular"
         onSubmit={handleSubmit}
       >
-        <input
-          ref={recaptchaTokenRef}
-          type="hidden"
-          name="recaptchaToken"
-        />
-
         <div className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
           <label htmlFor="company">Firma</label>
           <input
@@ -268,7 +212,10 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
                 aria-label="Telefónna predvoľba"
                 className={`${inputClassName} mt-0 text-center`}
                 onFocus={() => {
-                  if (!hasEditedPhonePrefix && phonePrefix === detectedPhonePrefix) {
+                  if (
+                    !hasEditedPhonePrefix &&
+                    phonePrefix === detectedPhonePrefix
+                  ) {
                     setPhonePrefix("");
                   }
                 }}
@@ -343,7 +290,7 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
 
         <button
           type="submit"
-          disabled={isPending || isSubmitting}
+          disabled={isSubmitting}
           className="mt-7 inline-flex min-h-14 w-full items-center justify-center rounded-md bg-[linear-gradient(135deg,#ECC560_0%,#FFD76A_100%)] px-7 text-base font-black uppercase tracking-[0.14em] text-black shadow-[0_8px_10px_rgba(0,0,0,.3)] transition hover:brightness-105 active:scale-[.99] disabled:cursor-not-allowed disabled:bg-none disabled:bg-[#6b6b6b] disabled:text-black/60 disabled:shadow-none disabled:hover:brightness-100 disabled:active:scale-100"
         >
           {form.submit}
