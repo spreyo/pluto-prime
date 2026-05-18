@@ -83,6 +83,7 @@ export default async function CleaningPage({
           <MotionHeroBackground className="absolute inset-0">
             <Image
               src={heroImage}
+              preload={true}
               alt="Profesionálne upratovanie interiéru"
               fill
               sizes="100vw"
