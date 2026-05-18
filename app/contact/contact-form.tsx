@@ -104,6 +104,8 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
 
       if (!response.ok) {
         throw new Error("Contact request failed");
+      } else{
+        console.log("success")
       }
 
       const result = (await response.json()) as ContactFormState;
