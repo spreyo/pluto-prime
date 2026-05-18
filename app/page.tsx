@@ -251,7 +251,7 @@ export default async function Home({
         className="relative grid min-h-[820px] overflow-hidden pt-16 text-white sm:min-h-[760px]"
       >
         <picture>
-        <MotionHeroBackground className="absolute inset-0 bg-[url('../public/img/bannerbg.png')] bg-cover bg-center" />
+        <MotionHeroBackground className="absolute inset-0 bg-[url('../public/img/bannerbg.jpg')] bg-cover bg-center" />
         </picture>
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,18,18,.08)_0%,rgba(15,18,18,.18)_40%,rgba(15,18,18,.34)_84%,#fbf8f3_100%)]" />
 

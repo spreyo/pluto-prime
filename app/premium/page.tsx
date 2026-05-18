@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const benefitIcons = [Check, Plane, Phone];
 
 const projectImage =
-  "/img/villa.png";
+  "/img/villa.jpg";
 
 const goldText =
   "bg-[linear-gradient(135deg,#A76B0B_0%,#ECC560_100%)] bg-clip-text text-transparent";
