@@ -23,9 +23,13 @@ import {
 import { getDictionaryFromParams } from "@/dictionaries";
 
 export const metadata: Metadata = {
-  title: "Workforce | Pluto Prime",
+  title: "Gekwalificeerd personeel inhuren - Bouw & techniek | Pluto Prime",
   description:
-    "Zabezpečenie kvalifikovaných a pomocných pracovníkov pre krátkodobé aj dlhodobé projekty v Holandsku.",
+    "Tijdelijk of langdurig personeel voor de bouw, techniek en algemene werkzaamheden. Snelle inzet in Amsterdam, Alkmaar, Groningen en heel Nederland.",
+  keywords: "personeel bouw, uitzendbureau bouw, tijdelijk personeel, gekwalificeerd personeel, bouwvakkers inhuren",
+  alternates:{
+    canonical: "/workforce"
+  }
 };
 
 const serviceIcons = [

@@ -13,9 +13,13 @@ import LionMark from "../components/lion-mark";
 import { getDictionaryFromParams } from "@/dictionaries";
 
 export const metadata: Metadata = {
-  title: "O spoločnosti | Pluto Prime",
+  metadataBase: new URL("https://plutoprime.nl"),
+  title: "Over Pluto Prime — Ervaring sinds 2000 in 5 Europese landen",
   description:
-    "Príbeh spoločnosti Pluto Prime, ktorá sa od roku 2000 venuje rekonštrukciám, upratovaniu a zabezpečeniu kvalifikovaných pracovníkov.",
+    "Sinds 2000 realiseren wij renovaties en verbouwingen in Nederland, België, Frankrijk, Duitsland en Slowakije. Lees over ons team, onze werkwijze en onze waarden.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 const stats = [

@@ -25,9 +25,20 @@ import {
 import { getDictionaryFromParams } from "@/dictionaries";
 
 export const metadata: Metadata = {
-  title: "Upratovanie | Pluto Prime",
+  metadataBase: new URL("https://plutoprime.nl"),
+  title: "Schoonmaakbedrijf Amsterdam, Alkmaar & Groningen | Pluto Prime",
   description:
-    "Profesionálne upratovacie služby pre domácnosti, firmy, hotely a priemyselné objekty v Holandsku.",
+    "Professionele schoonmaak voor woningen, kantoren, hotels en industriële ruimtes. Vaste schoonmakers, flexibele planning, betrouwbare service.",
+  keywords: [
+    "schoonmaakbedrijf Amsterdam",
+    "schoonmaak Alkmaar",
+    "hotelreiniging",
+    "kantoorschoonmaak",
+    "industriële schoonmaak",
+  ],
+  alternates: {
+    canonical: "/cleaning",
+  },
 };
 
 const serviceIcons = [

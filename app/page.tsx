@@ -20,7 +20,49 @@ import { getDictionaryFromParams } from "@/dictionaries";
 
 
 export const metadata: Metadata = {
-  description: ""
+  metadataBase: new URL("https://plutoprime.nl"),
+  title: "Pluto Prime — Renovaties, schoonmaak en personeel sinds 2000",
+  description:
+    "Vakkundige badkamerrenovaties, complete verbouwingen, professionele schoonmaak en gekwalificeerd personeel in Amsterdam, Alkmaar en Groningen. Vraag een vrijblijvende offerte aan.",
+  keywords: [
+    "renovatie Amsterdam",
+    "badkamer renoveren",
+    "verbouwing",
+    "schoonmaakbedrijf",
+    "aannemer",
+    "Pluto Prime",
+  ],
+  alternates: {
+    canonical: "/",
+    languages: {
+      nl: "/",
+      en: "/en/",
+      "x-default": "/",
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "nl_NL",
+    url: "/",
+    title: "Pluto Prime — Renovaties, schoonmaak en personeel sinds 2000",
+    description:
+      "Vakkundige badkamerrenovaties, complete verbouwingen en betrouwbare schoonmaak in Amsterdam, Alkmaar en Groningen.",
+    images: [
+      {
+        url: "/images/og-home.jpg",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    siteName: "Pluto Prime",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pluto Prime — Renovaties, schoonmaak en personeel",
+    description:
+      "Vakkundige renovaties en schoonmaak in Amsterdam, Alkmaar en Groningen.",
+    images: ["/images/og-home.jpg"],
+  },
 };
 
 const serviceAssets = [

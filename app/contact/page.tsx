@@ -14,10 +14,13 @@ import {
 import { getDictionaryFromParams } from "@/dictionaries";
 
 export const metadata: Metadata = {
-  title: "Kontakt | Pluto Prime",
+  title: "Contact & offerte aanvragen | Pluto Prime",
   description:
-    "Kontaktujte Pluto Prime pre rekonštrukcie, upratovanie alebo zabezpečenie pracovníkov v Holandsku.",
-};
+    "Vraag een vrijblijvende offerte aan voor uw renovatie, schoonmak of personeelsbehoefte. Stuur ons foto&apos;s en wij reageren binnen 24 uur.",
+  alternates:{
+    canonical:"/contact"
+  }
+  };
 
 const goldText =
   "bg-[linear-gradient(135deg,#A76B0B_0%,#ECC560_100%)] bg-clip-text text-transparent";

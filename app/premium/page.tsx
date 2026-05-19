@@ -15,10 +15,12 @@ import {
 import { getDictionaryFromParams } from "@/dictionaries";
 
 export const metadata: Metadata = {
-  title: "Premium International | Pluto Prime",
+  title: "Premium International Renovations - Dutch Quality Abroad",
   description:
-    "Prémiové riadenie rekonštrukcií a služieb pre klientov so zahraničnými nehnuteľnosťami.",
-};
+    "Your Dutch standard, anywhere in the world. Premium renovation services for luxury villas and apartments in Spain, the Caribbean, the Alps and beyond.",
+  keywords:"international renovations, luxury villa renovation, Dutch contractor abroad, premium renovation Europe",
+  alternates: {canonical:"/premium"}
+  };
 
 const benefitIcons = [Check, Plane, Phone];
 
