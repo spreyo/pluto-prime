@@ -42,20 +42,36 @@ Recommended direction:
 - Give every localized route a self-referencing canonical URL.
 - Add correct `hreflang` alternates for `nl`, `en`, and `x-default`.
 
-### 2. Sitemap and Robots Are Missing
+### 2. Sitemap Exists, But Placement and URL Strategy Need Fixing
 
-No `app/sitemap.ts`, `app/sitemap.xml`, `app/robots.ts`, or `app/robots.txt` was found.
+A `sitemap.xml` file has been added at the repository root.
+
+Good parts:
+
+- The XML is well-formed.
+- It uses the correct sitemap namespace.
+- It includes `xhtml:link` alternate entries for `nl`, `en`, and `x-default`.
+- It includes the main localized pages for home, about, renovations, cleaning, workforce, premium, and contact.
+- The priority structure is reasonable: homepage highest, commercial service pages high, about/premium medium, contact lower.
+
+Issues to fix:
+
+- The file is currently at the project root as `sitemap.xml`. In this Next.js app, that will not normally be served at `https://plutoprime.nl/sitemap.xml`. It should be placed in `public/sitemap.xml`, implemented as `app/sitemap.xml`, or generated as `app/sitemap.ts`.
+- There is still no `robots.txt` or `app/robots.ts` pointing crawlers to the sitemap.
+- The sitemap lists only `/nl/...` and `/en/...` URLs, but the app also has live unlocalized routes such as `/`, `/about`, `/cleaning`, `/renovations`, `/workforce`, `/premium`, and `/contact`.
+- This is only correct if the unlocalized routes are redirected, canonicalized, or intentionally excluded from indexing. Currently the broader codebase still has canonical and locale signals that conflict with that strategy.
+- The sitemap sets `x-default` to the Dutch version. That is reasonable for a `.nl` business if Dutch is the intended default, but the app currently has `defaultLocale: "en"` and `<html lang="en">`, so the implementation does not yet match the sitemap strategy.
 
 Recommended direction:
 
-- Add a sitemap containing every indexable page.
-- Include localized URLs.
-- Include useful `lastModified`, `changeFrequency`, and `priority` values.
-- Add a robots file that allows crawling and points to the sitemap.
+- Move or generate the sitemap from a location that is actually deployed at `/sitemap.xml`.
+- Add a robots file that allows crawling and points to `https://plutoprime.nl/sitemap.xml`.
+- Decide whether unlocalized URLs should exist as indexable pages.
+- If the intended SEO strategy is localized-only indexing, redirect or canonicalize unlocalized routes consistently.
+- Align the sitemap with `defaultLocale`, `<html lang>`, canonical URLs, and page metadata.
 
-Example routes to include:
+The current sitemap route set is good if the final strategy is localized URLs only:
 
-- `/`
 - `/nl`
 - `/nl/about`
 - `/nl/renovations`
@@ -71,7 +87,7 @@ Example routes to include:
 - `/en/premium`
 - `/en/contact`
 
-The exact list depends on the final locale strategy.
+If unlocalized routes remain public and indexable, they also need a clear sitemap/canonical strategy.
 
 ### 3. Metadata References Missing Assets
 
@@ -162,6 +178,7 @@ Recommended direction:
 ### Good Current Signals
 
 - Next.js metadata API is already being used.
+- A localized sitemap has been drafted with valid XML and alternate language links.
 - Most important pages export metadata.
 - Pages are static/exportable.
 - Main content is present in the HTML structure, not hidden behind API-only rendering.
@@ -173,12 +190,13 @@ Recommended direction:
 - Some metadata descriptions have typos or language mismatch, for example `schoonmak`.
 - Page metadata should match the rendered page language.
 - Links inside localized pages should stay localized. Some CTA links currently point to unlocalized paths.
+- The sitemap currently lives at the repo root. Move it to `public/sitemap.xml` or implement it via Next's `app/sitemap.ts`/`app/sitemap.xml` convention so it is actually served.
 - Remote Unsplash images are acceptable visually, but original project images would likely improve trust and conversion.
 
 ## Recommended Priority Order
 
 1. Fix locale strategy, canonical URLs, `hreflang`, and `<html lang>`.
-2. Add sitemap and robots.
+2. Move/generate the sitemap correctly and add robots.
 3. Fix missing favicon, manifest, and Open Graph assets.
 4. Add structured data.
 5. Expand service-page content for local intent.
