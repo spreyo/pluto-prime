@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import {gyre_adventor, manrope, space_grotesk} from '@/fonts';
 import { CornerRightUp } from "lucide-react";
@@ -14,7 +15,13 @@ import {
 } from "./home-motion";
 import LionMark from "./components/lion-mark";
 import { getDictionaryFromParams } from "@/dictionaries";
-import Head from "next/head";
+
+
+
+
+export const metadata: Metadata = {
+  description: ""
+};
 
 const serviceAssets = [
   {
@@ -245,7 +252,7 @@ export default async function Home({
   }));
 
   return (
-    
+
     <MotionRoot>
     <main className="min-h-screen bg-[#fbf8f3] text-[#202223]">
       <section
