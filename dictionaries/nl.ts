@@ -187,6 +187,8 @@ export const nl = {
       phonePlaceholder: "123 456 789",
       message: "Projectbeschrijving",
       messagePlaceholder: "Vertel ons meer over uw wensen",
+      photos: "Foto's",
+      photosHint: "Upload maximaal 4 JPG-, PNG-, WebP- of GIF-foto's. Max. 5 MB per foto.",
       submit: "Verzenden",
       status: {
         idle: "",

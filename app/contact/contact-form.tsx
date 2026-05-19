@@ -28,6 +28,15 @@ const initialState: ContactFormState = {
   code: "idle",
 };
 
+const maxPhotoCount = 4;
+const maxPhotoSizeBytes = 5 * 1024 * 1024;
+const acceptedPhotoTypes = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+]);
+
 function getDetectedPrefix() {
   if (typeof navigator === "undefined") {
     return "+31";
@@ -53,6 +62,20 @@ function formatPhoneNumber(value: string) {
   }
 
   return groups.join(" ");
+}
+
+function hasInvalidPhotos(formData: FormData) {
+  const photos = formData
+    .getAll("photos")
+    .filter((value): value is File => value instanceof File && value.size > 0);
+
+  return (
+    photos.length > maxPhotoCount ||
+    photos.some(
+      (photo) =>
+        photo.size > maxPhotoSizeBytes || !acceptedPhotoTypes.has(photo.type),
+    )
+  );
 }
 
 export function ContactForm({ form, inputClassName }: ContactFormProps) {
@@ -94,18 +117,19 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
     try {
       const currentForm = event.currentTarget;
       const formData = new FormData(currentForm);
+
+      if (hasInvalidPhotos(formData)) {
+        setClientErrorCode("validationFailed");
+        return;
+      }
+
       const response = await fetch(contactEndpoint, {
         method: "POST",
-        headers: {
-          "Content-Type":   "application/json",
-        },
-        body: JSON.stringify(Object.fromEntries(formData)),
+        body: formData,
       });
 
       if (!response.ok) {
         throw new Error("Contact request failed");
-      } else{
-        console.log("success")
       }
 
       const result = (await response.json()) as ContactFormState;
@@ -276,6 +300,26 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
             maxLength={2000}
             className={`${inputClassName} min-h-32 resize-y py-3`}
           />
+        </div>
+
+        <div>
+          <label
+            htmlFor="photos"
+            className="text-sm font-extrabold tracking-[0.08em] text-[#ECC560]"
+          >
+            {form.photos}
+          </label>
+          <input
+            id="photos"
+            name="photos"
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            multiple
+            className={`${inputClassName} py-1 file:mr-4 file:rounded-sm file:border-0 file:bg-[#ECC560] file:px-4 file:py-2 file:text-sm file:font-black file:text-black file:transition hover:file:brightness-105`}
+          />
+          <p className="mt-2 text-xs font-semibold text-white/60">
+            {form.photosHint}
+          </p>
         </div>
 
         {statusMessage ? (

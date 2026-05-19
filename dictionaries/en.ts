@@ -187,6 +187,8 @@ export const en = {
       phonePlaceholder: "123 456 789",
       message: "Project Description",
       messagePlaceholder: "Tell us more about your requirements",
+      photos: "Photos",
+      photosHint: "Upload up to 4 JPG, PNG, WebP, or GIF photos. Max 5 MB each.",
       submit: "Send",
       status: {
         idle: "",
