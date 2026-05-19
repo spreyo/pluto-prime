@@ -66,7 +66,7 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
   const [clientErrorCode, setClientErrorCode] =
     useState<ContactFormStatusCode>("idle");
   const contactEndpoint =
-    process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/api/contact";
+    process.env.NEXT_PUBLIC_CONTACT_ENDPOINT!;
   const statusMessage =
     clientErrorCode !== "idle"
       ? form.status[clientErrorCode]
@@ -97,7 +97,7 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
       const response = await fetch(contactEndpoint, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type":   "application/json",
         },
         body: JSON.stringify(Object.fromEntries(formData)),
       });
