@@ -1,6 +1,6 @@
 
 import type { Metadata } from "next";
-import { Mail, Phone } from "lucide-react";
+import { Contact, Mail, MessageCircle, Phone } from "lucide-react";
 import { space_grotesk } from "@/fonts";
 import LionMark from "../components/lion-mark";
 import { ContactForm } from "./contact-form";
@@ -86,15 +86,33 @@ export default async function ContactPage({
                 className="flex items-center justify-center gap-2 transition hover:text-[#ECC560]"
               >
                 <Phone className={`h-6 w-6 shrink-0 ${goldStroke}`} />
-                +49 174 5803567
+                {page.details.germanyPhone}
+              </a>
+              <a
+                href="tel:+421940535448"
+                className="flex items-center justify-center gap-2 transition hover:text-[#ECC560]"
+              >
+                <Phone className={`h-6 w-6 shrink-0 ${goldStroke}`} />
+                {page.details.slovakiaPhone}
+              </a>
+              <a
+                href="https://wa.me/421940535448"
+                className="flex items-center justify-center gap-2 transition hover:text-[#ECC560]"
+              >
+                <MessageCircle className={`h-6 w-6 shrink-0 ${goldStroke}`} />
+                {page.details.whatsapp}
               </a>
               <a
                 href="mailto:info@plutoprime.nl"
                 className="flex items-center justify-center gap-2 transition hover:text-[#ECC560]"
               >
                 <Mail className={`h-6 w-6 shrink-0 ${goldStroke}`} />
-                info@plutoprime.nl
+                {page.details.email}
               </a>
+              <span className="flex items-center justify-center gap-2">
+                <Contact className={`h-6 w-6 shrink-0 ${goldStroke}`} />
+                {page.details.linkedin}
+              </span>
             </div>
           </MotionHeroItem>
         </section>

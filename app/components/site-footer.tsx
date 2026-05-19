@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Mail, Phone } from "lucide-react";
+import { Contact, Mail, MessageCircle, Phone } from "lucide-react";
 import LionMark from "./lion-mark";
 import { space_grotesk } from "@/fonts";
 import { getLocaleFromPathname, localizeHref } from "@/i18n";
@@ -35,15 +35,33 @@ export function SiteFooter() {
             className="flex items-center justify-center gap-2 transition hover:text-[#f0c86d]"
           >
             <Phone className="h-4 w-4 text-[#c98b13]" />
-            +49 174 5803567
+            {dictionary.footer.contactItems.germanyPhone}
+          </a>
+          <a
+            href="tel:+421940535448"
+            className="flex items-center justify-center gap-2 transition hover:text-[#f0c86d]"
+          >
+            <Phone className="h-4 w-4 text-[#c98b13]" />
+            {dictionary.footer.contactItems.slovakiaPhone}
+          </a>
+          <a
+            href="https://wa.me/421940535448"
+            className="flex items-center justify-center gap-2 transition hover:text-[#f0c86d]"
+          >
+            <MessageCircle className="h-4 w-4 text-[#c98b13]" />
+            {dictionary.footer.contactItems.whatsapp}
           </a>
           <a
             href="mailto:info@plutoprime.nl"
             className="flex items-center justify-center gap-2 transition hover:text-[#f0c86d]"
           >
             <Mail className="h-4 w-4 text-[#c98b13]" />
-            info@plutoprime.nl
+            {dictionary.footer.contactItems.email}
           </a>
+          <span className="flex items-center justify-center gap-2">
+            <Contact className="h-4 w-4 text-[#c98b13]" />
+            {dictionary.footer.contactItems.linkedin}
+          </span>
         </div>
 
         <nav className="mt-8 grid grid-cols-3 gap-x-6 gap-y-4 text-xs font-bold text-white/34 sm:flex sm:flex-wrap sm:justify-center sm:gap-x-8">

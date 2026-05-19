@@ -16,6 +16,13 @@ export const nl = {
     workforce: "Personeel",
     contact: "Contact",
     rights: "Alle rechten voorbehouden",
+    contactItems: {
+      germanyPhone: "DE +49 174 5803567",
+      slovakiaPhone: "SK +421 940 535 448",
+      whatsapp: "+421 940 535448",
+      email: "info@plutoprime.nl",
+      linkedin: "Ľudovít Tomčík",
+    },
   },
   home: {
     since: "Sinds 2000",
@@ -161,6 +168,13 @@ export const nl = {
     title: "Contact",
     intro: "Heeft u een vraag of een project? Neem contact met ons op – wij helpen u graag verder.",
     detailsHeading: "Contactgegevens",
+    details: {
+      germanyPhone: "DE +49 174 5803567",
+      slovakiaPhone: "SK +421 940 535 448",
+      whatsapp: "+421 940 535448",
+      email: "info@plutoprime.nl",
+      linkedin: "Ľudovít Tomčík",
+    },
     form: {
       firstName: "Naam",
       firstNamePlaceholder: "Uw naam",

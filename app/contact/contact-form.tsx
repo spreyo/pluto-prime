@@ -66,7 +66,7 @@ export function ContactForm({ form, inputClassName }: ContactFormProps) {
   const [clientErrorCode, setClientErrorCode] =
     useState<ContactFormStatusCode>("idle");
   const contactEndpoint =
-    process.env.NEXT_PUBLIC_CONTACT_ENDPOINT;
+    process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/api/contact";
   const statusMessage =
     clientErrorCode !== "idle"
       ? form.status[clientErrorCode]
