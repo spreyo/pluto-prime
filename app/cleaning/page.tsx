@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -23,23 +22,15 @@ import {
   MotionSection,
 } from "../home-motion";
 import { getDictionaryFromParams } from "@/dictionaries";
+import { generateLocalizedMetadata } from "../seo-metadata";
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://plutoprime.nl"),
-  title: "Schoonmaakbedrijf Amsterdam, Alkmaar & Groningen | Pluto Prime",
-  description:
-    "Professionele schoonmaak voor woningen, kantoren, hotels en industriële ruimtes. Vaste schoonmakers, flexibele planning, betrouwbare service.",
-  keywords: [
-    "schoonmaakbedrijf Amsterdam",
-    "schoonmaak Alkmaar",
-    "hotelreiniging",
-    "kantoorschoonmaak",
-    "industriële schoonmaak",
-  ],
-  alternates: {
-    canonical: "/cleaning",
-  },
-};
+export function generateMetadata({
+  params,
+}: {
+  params?: Promise<{ locale?: string }>;
+}) {
+  return generateLocalizedMetadata("cleaning", params);
+}
 
 const serviceIcons = [
   House,

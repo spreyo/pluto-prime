@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -21,12 +20,15 @@ import {
   MotionSection,
 } from "../home-motion";
 import { getDictionaryFromParams } from "@/dictionaries";
+import { generateLocalizedMetadata } from "../seo-metadata";
 
-export const metadata: Metadata = {
-  title: "Rekonštrukcie | Pluto Prime",
-  description:
-    "Kompletné rekonštrukcie bytov, rodinných domov a kúpeľní v Holandsku a zahraničí.",
-};
+export function generateMetadata({
+  params,
+}: {
+  params?: Promise<{ locale?: string }>;
+}) {
+  return generateLocalizedMetadata("renovations", params);
+}
 
 const serviceIcons = [
   Bath,

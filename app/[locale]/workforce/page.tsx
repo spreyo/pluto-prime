@@ -1,1 +1,1 @@
-export { default, metadata } from "../../workforce/page";
+export { default, generateMetadata } from "../../workforce/page";

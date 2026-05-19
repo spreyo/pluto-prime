@@ -1,1 +1,1 @@
-export { default, metadata } from "../../premium/page";
+export { default, generateMetadata } from "../../premium/page";

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { gyre_adventor } from "@/fonts";
 import {
@@ -11,16 +10,15 @@ import {
 import { AboutStats } from "./about-stats";
 import LionMark from "../components/lion-mark";
 import { getDictionaryFromParams } from "@/dictionaries";
+import { generateLocalizedMetadata } from "../seo-metadata";
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://plutoprime.nl"),
-  title: "Over Pluto Prime — Ervaring sinds 2000 in 5 Europese landen",
-  description:
-    "Sinds 2000 realiseren wij renovaties en verbouwingen in Nederland, België, Frankrijk, Duitsland en Slowakije. Lees over ons team, onze werkwijze en onze waarden.",
-  alternates: {
-    canonical: "/about",
-  },
-};
+export function generateMetadata({
+  params,
+}: {
+  params?: Promise<{ locale?: string }>;
+}) {
+  return generateLocalizedMetadata("about", params);
+}
 
 const stats = [
   { target: 25, suffix: "+", label: "years" },

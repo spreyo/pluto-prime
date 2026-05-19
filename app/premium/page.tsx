@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Check, CircleDot, Globe, Phone, Plane } from "lucide-react";
@@ -13,14 +12,15 @@ import {
   MotionSection,
 } from "../home-motion";
 import { getDictionaryFromParams } from "@/dictionaries";
+import { generateLocalizedMetadata } from "../seo-metadata";
 
-export const metadata: Metadata = {
-  title: "Premium International Renovations - Dutch Quality Abroad",
-  description:
-    "Your Dutch standard, anywhere in the world. Premium renovation services for luxury villas and apartments in Spain, the Caribbean, the Alps and beyond.",
-  keywords:"international renovations, luxury villa renovation, Dutch contractor abroad, premium renovation Europe",
-  alternates: {canonical:"/premium"}
-  };
+export function generateMetadata({
+  params,
+}: {
+  params?: Promise<{ locale?: string }>;
+}) {
+  return generateLocalizedMetadata("premium", params);
+}
 
 const benefitIcons = [Check, Plane, Phone];
 

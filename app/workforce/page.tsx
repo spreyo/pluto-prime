@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -21,16 +20,15 @@ import {
   MotionSection,
 } from "../home-motion";
 import { getDictionaryFromParams } from "@/dictionaries";
+import { generateLocalizedMetadata } from "../seo-metadata";
 
-export const metadata: Metadata = {
-  title: "Gekwalificeerd personeel inhuren - Bouw & techniek | Pluto Prime",
-  description:
-    "Tijdelijk of langdurig personeel voor de bouw, techniek en algemene werkzaamheden. Snelle inzet in Amsterdam, Alkmaar, Groningen en heel Nederland.",
-  keywords: "personeel bouw, uitzendbureau bouw, tijdelijk personeel, gekwalificeerd personeel, bouwvakkers inhuren",
-  alternates:{
-    canonical: "/workforce"
-  }
-};
+export function generateMetadata({
+  params,
+}: {
+  params?: Promise<{ locale?: string }>;
+}) {
+  return generateLocalizedMetadata("workforce", params);
+}
 
 const serviceIcons = [
   UsersRound,

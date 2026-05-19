@@ -1,5 +1,4 @@
 
-import type { Metadata } from "next";
 import { Mail, Phone } from "lucide-react";
 import { space_grotesk } from "@/fonts";
 import LionMark from "../components/lion-mark";
@@ -12,15 +11,15 @@ import {
   MotionSection,
 } from "../home-motion";
 import { getDictionaryFromParams } from "@/dictionaries";
+import { generateLocalizedMetadata } from "../seo-metadata";
 
-export const metadata: Metadata = {
-  title: "Contact & offerte aanvragen | Pluto Prime",
-  description:
-    "Vraag een vrijblijvende offerte aan voor uw renovatie, schoonmak of personeelsbehoefte. Stuur ons foto&apos;s en wij reageren binnen 24 uur.",
-  alternates:{
-    canonical:"/contact"
-  }
-  };
+export function generateMetadata({
+  params,
+}: {
+  params?: Promise<{ locale?: string }>;
+}) {
+  return generateLocalizedMetadata("contact", params);
+}
 
 const goldText =
   "bg-[linear-gradient(135deg,#A76B0B_0%,#ECC560_100%)] bg-clip-text text-transparent";

@@ -14,33 +14,38 @@ Strengths:
 - Images generally include descriptive `alt` text.
 - Content already targets relevant service areas such as Amsterdam, Alkmaar, and Groningen.
 
-The largest issue is **language and canonical consistency**. The site has localized routes, but the default locale, metadata, `lang` attribute, canonical URLs, and actual rendered page language do not always line up.
+The largest remaining issue is **language and route consistency**. Locale-aware metadata and canonicals have been improved, but the root layout still hardcodes `lang="en"` and unlocalized routes are still generated.
 
 ## Highest Priority Issues
 
-### 1. Multilingual SEO Is Inconsistent
+### 1. Multilingual SEO Is Partially Fixed
 
-Current observations:
+Fixed in the first SEO pass:
 
-- `i18n.ts` sets `defaultLocale` to `en`.
-- `app/layout.tsx` hardcodes `<html lang="en">` for all pages.
-- The home page metadata is Dutch and declares `/` as `nl`, `/en/` as English, and `/` as `x-default`.
-- Localized pages such as `/en/cleaning` and `/nl/cleaning` reuse metadata from the unlocalized page files.
-- Several service pages canonicalize to unlocalized URLs such as `/cleaning` or `/workforce`, even when rendered under a locale route.
+- `i18n.ts` now sets `defaultLocale` to `nl`.
+- The main pages now use locale-aware `generateMetadata`.
+- `/nl/...` pages get Dutch titles, descriptions, canonicals, Open Graph locale, and alternate language links.
+- `/en/...` pages get English titles, descriptions, canonicals, Open Graph locale, and alternate language links.
+- Unlocalized pages such as `/cleaning` now canonicalize to the Dutch localized version, for example `/nl/cleaning`.
+- `x-default` now consistently points to the Dutch localized URL.
+
+Remaining observations:
+
+- `app/layout.tsx` still hardcodes `<html lang="en">` for all pages. This was intentionally left unchanged for now.
+- Unlocalized routes such as `/`, `/about`, `/cleaning`, `/renovations`, `/workforce`, `/premium`, and `/contact` are still generated.
+- Because unlocalized routes still exist, they should either redirect to `/nl/...` or keep strong canonical signals to `/nl/...`.
+- A full layout restructure would be needed to make `<html lang>` truly dynamic per locale.
 
 Why this matters:
 
 Search engines rely on consistent language, canonical, and alternate signals. If the body content, title, description, `html lang`, canonical URL, and `hreflang` alternates disagree, Google may choose the wrong URL, ignore alternates, or rank the wrong language version.
 
-Recommended direction:
+Recommended remaining direction:
 
-- Decide whether `/` should be Dutch or English.
-- For a `.nl` business targeting Dutch customers, make `/` Dutch and `/en` English.
-- Set the default locale accordingly.
-- Generate locale-specific metadata for every page.
-- Set `<html lang>` dynamically or restructure layouts so each locale gets the correct language.
-- Give every localized route a self-referencing canonical URL.
-- Add correct `hreflang` alternates for `nl`, `en`, and `x-default`.
+- Keep the Dutch-first strategy: `/nl/...` as primary Dutch pages, `/en/...` as English pages, and Dutch as `x-default`.
+- Decide whether unlocalized URLs should redirect to `/nl/...`.
+- Eventually set `<html lang>` dynamically or restructure layouts so each locale gets the correct language.
+- Keep localized pages self-canonical, with matching `hreflang` alternates for `nl`, `en`, and `x-default`.
 
 ### 2. Sitemap Exists, But Placement and URL Strategy Need Fixing
 
@@ -60,7 +65,7 @@ Issues to fix:
 - There is still no `robots.txt` or `app/robots.ts` pointing crawlers to the sitemap.
 - The sitemap lists only `/nl/...` and `/en/...` URLs, but the app also has live unlocalized routes such as `/`, `/about`, `/cleaning`, `/renovations`, `/workforce`, `/premium`, and `/contact`.
 - This is only correct if the unlocalized routes are redirected, canonicalized, or intentionally excluded from indexing. Currently the broader codebase still has canonical and locale signals that conflict with that strategy.
-- The sitemap sets `x-default` to the Dutch version. That is reasonable for a `.nl` business if Dutch is the intended default, but the app currently has `defaultLocale: "en"` and `<html lang="en">`, so the implementation does not yet match the sitemap strategy.
+- The sitemap sets `x-default` to the Dutch version. That now matches `defaultLocale: "nl"`, but `app/layout.tsx` still hardcodes `<html lang="en">`.
 
 Recommended direction:
 
@@ -68,7 +73,8 @@ Recommended direction:
 - Add a robots file that allows crawling and points to `https://plutoprime.nl/sitemap.xml`.
 - Decide whether unlocalized URLs should exist as indexable pages.
 - If the intended SEO strategy is localized-only indexing, redirect or canonicalize unlocalized routes consistently.
-- Align the sitemap with `defaultLocale`, `<html lang>`, canonical URLs, and page metadata.
+- Keep the sitemap aligned with `defaultLocale`, canonical URLs, and page metadata.
+- Fix `<html lang>` later when a layout/i18n restructure is approved.
 
 The current sitemap route set is good if the final strategy is localized URLs only:
 
@@ -188,14 +194,14 @@ Recommended direction:
 
 - `keywords` metadata has very limited SEO value today. It is fine to keep, but title, description, content quality, internal linking, structured data, and local trust signals matter much more.
 - Some metadata descriptions have typos or language mismatch, for example `schoonmak`.
-- Page metadata should match the rendered page language.
+- Page metadata now matches the localized route language for `/nl/...` and `/en/...`.
 - Links inside localized pages should stay localized. Some CTA links currently point to unlocalized paths.
 - The sitemap currently lives at the repo root. Move it to `public/sitemap.xml` or implement it via Next's `app/sitemap.ts`/`app/sitemap.xml` convention so it is actually served.
 - Remote Unsplash images are acceptable visually, but original project images would likely improve trust and conversion.
 
 ## Recommended Priority Order
 
-1. Fix locale strategy, canonical URLs, `hreflang`, and `<html lang>`.
+1. Finish the remaining locale work: redirects for unlocalized routes and dynamic `<html lang>` when layout changes are approved.
 2. Move/generate the sitemap correctly and add robots.
 3. Fix missing favicon, manifest, and Open Graph assets.
 4. Add structured data.
