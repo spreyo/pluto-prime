@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /nl/
+Allow: /en/
+Disallow: /about/
+Disallow: /renovations/
+Disallow: /cleaning/
+Disallow: /workforce/
+Disallow: /premium/
+Disallow: /contact/
+
+Sitemap: https://plutoprime.nl/sitemap.xml

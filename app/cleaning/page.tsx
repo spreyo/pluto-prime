@@ -86,7 +86,7 @@ export default async function CleaningPage({
             <Image
               src={heroImage}
               preload={true}
-              alt="Profesionálne upratovanie interiéru"
+              alt="Professional interior cleaning service in progress"
               fill
               sizes="100vw"
               className="object-cover opacity-30"
@@ -131,7 +131,7 @@ export default async function CleaningPage({
             >
               <Image
                 src={cleaningImage}
-                alt="Upratovacie vybavenie pripravené na prácu"
+                alt="Professional cleaning equipment ready for service"
                 width={900}
                 height={620}
                 loading="lazy"

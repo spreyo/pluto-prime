@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- HOMEPAGE -->
+  <url>
+    <loc>https://plutoprime.nl/nl/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/"/>
+  </url>
+  <url>
+    <loc>https://plutoprime.nl/en/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/"/>
+  </url>
+
+  <!-- ABOUT -->
+  <url>
+    <loc>https://plutoprime.nl/nl/about/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/about/"/>
+  </url>
+  <url>
+    <loc>https://plutoprime.nl/en/about/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/about/"/>
+  </url>
+
+  <!-- RENOVATIONS -->
+  <url>
+    <loc>https://plutoprime.nl/nl/renovations/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/renovations/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/renovations/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/renovations/"/>
+  </url>
+  <url>
+    <loc>https://plutoprime.nl/en/renovations/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/renovations/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/renovations/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/renovations/"/>
+  </url>
+
+  <!-- CLEANING -->
+  <url>
+    <loc>https://plutoprime.nl/nl/cleaning/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/cleaning/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/cleaning/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/cleaning/"/>
+  </url>
+  <url>
+    <loc>https://plutoprime.nl/en/cleaning/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/cleaning/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/cleaning/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/cleaning/"/>
+  </url>
+
+  <!-- WORKFORCE -->
+  <url>
+    <loc>https://plutoprime.nl/nl/workforce/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/workforce/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/workforce/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/workforce/"/>
+  </url>
+  <url>
+    <loc>https://plutoprime.nl/en/workforce/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/workforce/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/workforce/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/workforce/"/>
+  </url>
+
+  <!-- PREMIUM (Global Solutions) -->
+  <url>
+    <loc>https://plutoprime.nl/nl/premium/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/premium/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/premium/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/premium/"/>
+  </url>
+  <url>
+    <loc>https://plutoprime.nl/en/premium/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/premium/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/premium/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/premium/"/>
+  </url>
+
+  <!-- CONTACT -->
+  <url>
+    <loc>https://plutoprime.nl/nl/contact/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/contact/"/>
+  </url>
+  <url>
+    <loc>https://plutoprime.nl/en/contact/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://plutoprime.nl/nl/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://plutoprime.nl/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://plutoprime.nl/nl/contact/"/>
+  </url>
+
+</urlset>

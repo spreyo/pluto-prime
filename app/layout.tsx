@@ -22,6 +22,15 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
+  openGraph: {
+    type: "website",
+    siteName: "Pluto Prime",
+    images: [{ url: "/img/bannerbg.jpg", width: 1920, height: 1080 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/img/bannerbg.jpg"],
+  },
   other: {
     "geo.region": "NL-NH",
     "geo.placename": "Amsterdam",
@@ -43,7 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="nl"
       className="h-full antialiased"
     >
       <body className={`min-h-full ${manrope.className} flex flex-col`}>

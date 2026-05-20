@@ -82,7 +82,7 @@ export default async function WorkforcePage({
           <MotionHeroBackground className="absolute inset-0">
             <Image
               src={heroImage}
-              alt="Pracovníci na stavebnom projekte"
+              alt="Construction workers on a building project"
               fill
               priority
               sizes="100vw"
@@ -127,10 +127,9 @@ export default async function WorkforcePage({
             >
               <Image
                 src={workforceImage}
-                alt="Pracovné vesty a ochranné prilby pripravené na projekt"
+                alt="Safety vests and hard hats prepared for a construction project"
                 width={900}
                 height={620}
-                loading="lazy"
                 sizes="(min-width: 1024px) 42vw, 100vw"
                 className="aspect-[1.45/1] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.035]"
                 preload={true}

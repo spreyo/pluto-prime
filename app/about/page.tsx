@@ -10,6 +10,7 @@ import {
 import { AboutStats } from "./about-stats";
 import LionMark from "../components/lion-mark";
 import { getDictionaryFromParams } from "@/dictionaries";
+import { defaultLocale, isLocale } from "@/i18n";
 import { generateLocalizedMetadata } from "../seo-metadata";
 
 export function generateMetadata({
@@ -34,6 +35,8 @@ export default async function AboutPage({
 }: {
   params?: Promise<{ locale?: string }>;
 }) {
+  const resolvedParams = params ? await params : undefined;
+  const locale = isLocale(resolvedParams?.locale) ? resolvedParams.locale : defaultLocale;
   const dictionary = await getDictionaryFromParams(params);
   const page = dictionary.about;
 
@@ -87,7 +90,7 @@ export default async function AboutPage({
                 {page.ctaTitle}
               </h2>
               <Link
-                href="/contact"
+                href={`/${locale}/contact`}
                 className="mt-6 inline-flex min-h-12 w-full max-w-xs items-center justify-center rounded bg-[#b87500] px-7 text-base font-extrabold text-white shadow-[0_7px_8px_rgba(0,0,0,.32)] transition hover:bg-[#9f6400]"
               >
                 {page.cta}
@@ -124,7 +127,7 @@ export default async function AboutPage({
               {page.ctaTitle}
             </h2>
             <Link
-              href="/contact"
+              href={`/${locale}/contact`}
               className="mt-5 inline-flex min-h-12 w-full max-w-xs items-center justify-center rounded bg-[#b87500] px-7 text-base font-extrabold text-white shadow-[0_7px_8px_rgba(0,0,0,.32)] transition hover:bg-[#9f6400]"
             >
               {page.cta}

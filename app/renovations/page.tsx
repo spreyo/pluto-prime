@@ -86,7 +86,7 @@ export default async function RenovationsPage({
         <MotionHeroBackground className="absolute inset-0">
           <Image
             src={heroImage}
-            alt="Rozpracovaná rekonštrukcia interiéru"
+            alt="Interior renovation project in progress"
             fill
             sizes="100vw"
             className="object-cover opacity-30"
@@ -133,7 +133,7 @@ export default async function RenovationsPage({
 
             <Image
               src={bathroomImage}
-              alt="Zrekonštruovaná kúpeľňa s vaňou a sprchou"
+              alt="Renovated bathroom with bathtub and shower"
               width={900}
               height={620}
               loading="lazy"
@@ -159,7 +159,7 @@ export default async function RenovationsPage({
           >
             <Image
               src={interiorImage}
-              alt="Rozpracovaná rekonštrukcia izby"
+              alt="Room renovation in progress"
               width={900}
               height={620}
               sizes="(min-width: 1024px) 42vw, 100vw"

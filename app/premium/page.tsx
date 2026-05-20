@@ -12,6 +12,7 @@ import {
   MotionSection,
 } from "../home-motion";
 import { getDictionaryFromParams } from "@/dictionaries";
+import { defaultLocale, isLocale } from "@/i18n";
 import { generateLocalizedMetadata } from "../seo-metadata";
 
 export function generateMetadata({
@@ -37,6 +38,8 @@ export default async function PremiumPage({
 }: {
   params?: Promise<{ locale?: string }>;
 }) {
+  const resolvedParams = params ? await params : undefined;
+  const locale = isLocale(resolvedParams?.locale) ? resolvedParams.locale : defaultLocale;
   const dictionary = await getDictionaryFromParams(params);
   const page = dictionary.premium;
 
@@ -121,7 +124,7 @@ export default async function PremiumPage({
             >
               <Image
                 src={projectImage}
-                alt="Prémiový medzinárodný stavebný projekt pri mori"
+                alt="Premium international renovation project by the sea"
                 width={900}
                 height={620}
                 loading="lazy"
@@ -177,7 +180,7 @@ export default async function PremiumPage({
               {page.ctaText}
             </p>
             <Link
-              href="/contact"
+              href={`/${locale}/contact`}
               className="mt-9 inline-flex min-h-14 w-full max-w-md items-center justify-center rounded-md bg-[#c9963d] px-7 text-base font-extrabold text-white shadow-[0_8px_10px_rgba(0,0,0,.3)] transition hover:bg-[#ad7a21]"
             >
               {dictionary.servicePage.contactButton}

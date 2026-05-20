@@ -14,6 +14,7 @@ import {
 } from "./home-motion";
 import LionMark from "./components/lion-mark";
 import { getDictionaryFromParams } from "@/dictionaries";
+import { defaultLocale, isLocale } from "@/i18n";
 import { generateLocalizedMetadata } from "./seo-metadata";
 
 
@@ -245,6 +246,8 @@ export default async function Home({
 }: {
   params?: Promise<{ locale?: string }>;
 }) {
+  const resolvedParams = params ? await params : undefined;
+  const locale = isLocale(resolvedParams?.locale) ? resolvedParams.locale : defaultLocale;
   const dictionary = await getDictionaryFromParams(params);
   const services = serviceAssets.map((service, index) => ({
     ...service,
@@ -304,7 +307,7 @@ export default async function Home({
 
           <MotionLink
             id="estimate"
-            href="/contact"
+            href={`/${locale}/contact`}
             delay={0.66}
             className="mt-14 inline-flex min-h-14 w-full max-w-sm items-center justify-center rounded-md bg-[#bd7f09] px-8 text-base font-black text-white shadow-[0_18px_34px_rgba(57,36,3,.38)] transition hover:bg-[#a96f05]"
           >

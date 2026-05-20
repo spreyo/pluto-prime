@@ -12,6 +12,7 @@ type SeoPage =
 
 type PageSeo = {
   path: string;
+  ogImage?: string;
   content: Record<
     Locale,
     {
@@ -31,6 +32,7 @@ type MetadataParams = {
 const pageSeo: Record<SeoPage, PageSeo> = {
   home: {
     path: "",
+    ogImage: "/img/bannerbg.jpg",
     content: {
       nl: {
         title: "Pluto Prime - Renovaties, schoonmaak en personeel sinds 2000",
@@ -61,6 +63,7 @@ const pageSeo: Record<SeoPage, PageSeo> = {
   },
   about: {
     path: "/about",
+    ogImage: "/img/bannerbg.jpg",
     content: {
       nl: {
         title: "Over Pluto Prime - Ervaring sinds 2000 in 5 Europese landen",
@@ -76,6 +79,7 @@ const pageSeo: Record<SeoPage, PageSeo> = {
   },
   renovations: {
     path: "/renovations",
+    ogImage: "/img/renovations.jpg",
     content: {
       nl: {
         title: "Renovaties en badkamerrenovatie | Pluto Prime",
@@ -103,6 +107,7 @@ const pageSeo: Record<SeoPage, PageSeo> = {
   },
   cleaning: {
     path: "/cleaning",
+    ogImage: "/img/cleaning.jpg",
     content: {
       nl: {
         title: "Schoonmaakbedrijf Amsterdam, Alkmaar & Groningen | Pluto Prime",
@@ -131,6 +136,7 @@ const pageSeo: Record<SeoPage, PageSeo> = {
   },
   workforce: {
     path: "/workforce",
+    ogImage: "/img/workforce.jpg",
     content: {
       nl: {
         title: "Gekwalificeerd personeel inhuren - Bouw & techniek | Pluto Prime",
@@ -159,6 +165,7 @@ const pageSeo: Record<SeoPage, PageSeo> = {
   },
   premium: {
     path: "/premium",
+    ogImage: "/img/villa.jpg",
     content: {
       nl: {
         title: "Premium internationale renovaties - Nederlandse kwaliteit wereldwijd",
@@ -186,6 +193,7 @@ const pageSeo: Record<SeoPage, PageSeo> = {
   },
   contact: {
     path: "/contact",
+    ogImage: "/img/bannerbg.jpg",
     content: {
       nl: {
         title: "Contact & offerte aanvragen | Pluto Prime",
@@ -240,11 +248,19 @@ export async function generateLocalizedMetadata(
       title: content.openGraphTitle ?? content.title,
       description: content.openGraphDescription ?? content.description,
       siteName: "Pluto Prime",
+      images: [
+        {
+          url: `https://plutoprime.nl${seo.ogImage ?? "/img/bannerbg.jpg"}`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: content.title,
       description: content.description,
+      images: [`https://plutoprime.nl${seo.ogImage ?? "/img/bannerbg.jpg"}`],
     },
   };
 }
